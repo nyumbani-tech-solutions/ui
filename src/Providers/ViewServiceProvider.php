@@ -41,14 +41,11 @@ class ViewServiceProvider extends ServiceProvider
             return;
         }
 
-        //  Add the package views as the last path, for the framework's error lookup
+        //  Add the package views as the last path, for the framework's error lookup only: the view finder is left alone, so the package's layouts and components never answer to plain names such as components.modal
         config(['view.paths' => [
             ...config('view.paths'),
             ui_path('resources/views')],
         ]);
-
-        //  Add it to the view finder as well, which already holds the original paths
-        View::addLocation(ui_path('resources/views'));
     }
 
     /**
