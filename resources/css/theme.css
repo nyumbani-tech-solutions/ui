@@ -11,6 +11,9 @@
 @source '../../src/Views/**/*.php';
 @source '../js/**/*.js';
 
+/* The docs package's layout, when it is installed, so the app's styles carry the responsive classes its sidebar uses; without them the app's .hidden hides the sidebar on large screens. A missing folder is ignored. */
+@source '../../../docs/resources/views/**/*.blade.php';
+
 @theme {
     --color-primary-darker: #7a4708;
     --color-primary-dark: #9a5204;
