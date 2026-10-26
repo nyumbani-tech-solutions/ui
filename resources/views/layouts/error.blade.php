@@ -39,10 +39,10 @@
                 @endif
                 <a href="{{ url('/') }}" class="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-medium text-secondary-dark shadow-lg transition hover:bg-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
                     <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
-                    Take me home
+                    {{ __('Take me home') }}
                 </a>
                 <a href="{{ url()->previous(url('/')) }}" class="inline-flex items-center gap-2 rounded-md px-5 py-2.5 font-medium text-white ring-1 ring-white/30 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
-                    Go back
+                    {{ __('Go back') }}
                 </a>
             </div>
 

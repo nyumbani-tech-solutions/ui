@@ -32,6 +32,7 @@ class UiDocs
                 'scripts' => 'Scripts',
                 'error-pages' => 'Error pages',
                 'error-bags' => 'Error bags',
+                'languages' => 'Languages',
             ]],
             ['title' => 'Conventions', 'pages' => [
                 'view-layer' => 'Views and scripts',

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Nyumbani\Docs\Http\Middleware\EnsureDocsAreAvailable;
 use Nyumbani\Ui\Http\Controllers\DocsSamplesController;
 use Nyumbani\Ui\Http\Controllers\ImageController;
+use Nyumbani\Ui\Http\Controllers\LocaleController;
 use Nyumbani\Ui\Http\Controllers\WebManifestController;
 
 //  Serve the package images, which are static so they need no session
@@ -20,6 +21,11 @@ Route::get('nyumbani/favicons/{image}', ImageController::class)
 //  Describe the installable app, named after the app that uses the package
 Route::get('nyumbani/site.webmanifest', WebManifestController::class)
     ->name('nyumbani.manifest');
+
+//  Switch the language, open to guests so the sign-in page can offer it; it needs the session, so it runs in the web group
+Route::get('nyumbani/locale/{locale}', LocaleController::class)
+    ->middleware('web')
+    ->name('nyumbani.locale');
 
 //  The docs samples need the docs package, a dev dependency that production does not have
 if (class_exists(EnsureDocsAreAvailable::class)) {

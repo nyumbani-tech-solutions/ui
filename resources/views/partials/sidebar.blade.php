@@ -11,7 +11,7 @@
 
     <div class="relative mb-1 flex h-14 items-center justify-center bg-cover bg-center px-4 text-white group-data-collapsed/shell:lg:px-0" style="background-image: url('{{ route('nyumbani.image', ['image' => 'shell-sidebar.jpeg']) }}')">
         <div class="absolute inset-0 bg-primary-dark/70"></div>
-        <button type="button" data-shell-close aria-label="Close menu" class="absolute right-2 top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-primary-dark text-white lg:hidden">
+        <button type="button" data-shell-close aria-label="{{ __('Close menu') }}" class="absolute right-2 top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-primary-dark text-white lg:hidden">
             <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
         <div class="relative h-10 w-10 rounded-full bg-white p-1">

@@ -34,6 +34,8 @@
                     </div>
 
                     @yield('content')
+
+                    @include('nyumbani::partials.locale-switcher', ['class' => 'mt-8 justify-center'])
                 </main>
             </div>
         </div>

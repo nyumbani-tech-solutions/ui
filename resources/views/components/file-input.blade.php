@@ -20,11 +20,11 @@
         </div>
 
         <div class="min-w-0">
-            <p class="text-sm text-gray-900 truncate" x-text="displayName || 'No file uploaded'"></p>
+            <p class="text-sm text-gray-900 truncate" x-text="displayName || @js(__('No file uploaded'))"></p>
             <p class="text-xs text-gray-500" x-show="displaySize" x-text="displaySize"></p>
 
             <label class="mt-1 inline-block text-xs font-medium text-primary cursor-pointer hover:underline">
-                <span x-text="fileSelected ? 'Change file' : 'Upload file'"></span>
+                <span x-text="fileSelected ? @js(__('Change file')) : @js(__('Upload file'))"></span>
                 <input
                     type="file"
                     name="{{ $name }}"

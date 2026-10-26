@@ -45,9 +45,13 @@ class Modal extends Component
         public bool $dismissable = true,
         public ?string $src = null,
         public bool $confirm = false,
-        public string $continueLabel = 'Continue',
-        public string $backLabel = 'Back',
+        public ?string $continueLabel = null,
+        public ?string $backLabel = null,
     ) {
+        //  Translate the default step labels
+        $this->continueLabel ??= __('Continue');
+        $this->backLabel ??= __('Back');
+
         //  Check whether the panel slides in from the right
         $this->isSlideOver = $position === 'right';
 

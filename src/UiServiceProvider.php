@@ -7,6 +7,7 @@ use Nyumbani\Docs\DocsRegistry;
 use Nyumbani\Essentials\Contracts\AuthViews;
 use Nyumbani\Ui\Console\Commands\InstallCommand;
 use Nyumbani\Ui\Docs\UiDocs;
+use Nyumbani\Ui\Http\Middleware\SetLocale;
 use Nyumbani\Ui\Providers\ViewServiceProvider;
 use Nyumbani\Ui\Views\NyumbaniAuthViews;
 
@@ -44,6 +45,11 @@ class UiServiceProvider extends ServiceProvider
             $this->app
                 ->make(DocsRegistry::class)
                 ->register(UiDocs::describe());
+        }
+
+        //  Apply the visitor's language on every web request, once the app offers more than one
+        if (count(config('ui.locales', [])) > 1) {
+            $this->app['router']->pushMiddlewareToGroup('web', SetLocale::class);
         }
 
         //  Load the routes

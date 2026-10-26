@@ -60,6 +60,8 @@ Publish `config/ui.php` with `php artisan vendor:publish --tag=ui-config`.
 | --- | --- | --- |
 | `branding.description` | `UI_DESCRIPTION` | The sentence under the app name on the sign-in page |
 | `branding.theme_color` | `UI_THEME_COLOR` | The browser address bar and installed app colour (`#d97706`) |
+| `locales` | | The languages offered as `code => label`. With more than one, the UI shows a language switch and applies the visitor's choice. Default: English only |
+| `js_translations` | | English texts your scripts read through `window.__('text')`, translated on the server |
 | `error_pages` | | Set to `false` to leave the framework error pages alone |
 
 ## Changing the scripts

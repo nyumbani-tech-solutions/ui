@@ -4,6 +4,7 @@
  * @alpinejs/ui) are listed in the package.json beside this folder and bundled into resources/dist, so an
  * app installs none of them. The formatting helpers live in nyumbani/essentials.
  */
+import './translate';
 import './toastr';
 import './shell';
 import './submit';

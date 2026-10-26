@@ -27,11 +27,11 @@
 
                 @if (method_exists(user(), 'isImpersonated') && user()->isImpersonated())
                     <div class="flex h-9 items-center justify-center gap-x-4 bg-primary-dark px-4 text-center text-xs text-white">
-                        <span>Impersonating <span class="font-semibold">{{ user()->name }}</span></span>
+                        <span>{{ __('Impersonating') }} <span class="font-semibold">{{ user()->name }}</span></span>
 
                         <form method="POST" action="{{ route('essentials.impersonation.leave') }}">
                             @csrf
-                            <button type="submit" class="font-medium underline hover:text-gray-200">Leave</button>
+                            <button type="submit" class="font-medium underline hover:text-gray-200">{{ __('Leave') }}</button>
                         </form>
                     </div>
                 @endif

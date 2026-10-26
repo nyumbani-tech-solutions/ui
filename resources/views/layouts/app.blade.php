@@ -16,6 +16,10 @@
     @if (class_exists(Livewire::class))
         @livewireStyles
     @endif
+    {{--  The translations the app's own scripts read through window.__  --}}
+    <script>
+        window.__lang = @js(collect(config('ui.js_translations', []))->mapWithKeys(fn ($text) => [$text => __($text)]));
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
