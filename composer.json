@@ -1,0 +1,46 @@
+{
+	"name": "nyumbani/ui",
+	"type": "library",
+	"description": "The Nyumbani look: layouts, sign-in pages, error pages, components, scripts and branding for apps built on nyumbani/essentials.",
+	"homepage": "https://nyumbanitech.co.ke/",
+	"keywords": [
+		"laravel",
+		"nyumbani",
+		"ui"
+	],
+	"license": "proprietary",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"authors": [
+		{
+			"name": "Alvin Kaburu",
+			"email": "geekaburu@nyumbanitech.co.ke"
+		}
+	],
+	"require": {
+		"php": "^8.3",
+		"livewire/livewire": "^4.4",
+		"nyumbani/essentials": "^1.0"
+	},
+	"require-dev": {
+		"nyumbani/docs": "^1.1"
+	},
+	"suggest": {
+		"nyumbani/docs": "The local-only guides of the UI package, installed with composer require --dev nyumbani/docs"
+	},
+	"autoload": {
+		"psr-4": {
+			"Nyumbani\\Ui\\": "src/"
+		},
+		"files": [
+			"src/Support/helpers.php"
+		]
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Nyumbani\\Ui\\UiServiceProvider"
+			]
+		}
+	}
+}
