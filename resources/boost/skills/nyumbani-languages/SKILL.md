@@ -14,7 +14,7 @@ List them in `config/ui.php`, as `code => label`:
 ```php
 'locales' => ['en' => 'EN', 'zh' => '中文'],
 ```
-With more than one, the UI shows a switch on the sign-in pages and in the navbar, keeps the choice in the session (`GET nyumbani/locale/{locale}`, route `nyumbani.locale`, open to guests, 404 for an unlisted code) and applies it on every web request with its `SetLocale` middleware. With one, nothing is shown and nothing runs. The app has no locale route, middleware or switcher of its own; delete any it has. `config('app.locale')` stays the default language.
+With more than one, the UI shows a switch on the sign-in pages and in the navbar, keeps the choice in the `nyumbani_locale` cookie for a year, so it survives a logout (`GET nyumbani/locale/{locale}`, route `nyumbani.locale`, open to guests, 404 for an unlisted code) and applies it on every web request with its `SetLocale` middleware. With one, nothing is shown and nothing runs. The app has no locale route, middleware or switcher of its own; delete any it has. `config('app.locale')` stays the default language.
 
 ## Translate
 - Package text: add the English text as the key in `lang/{code}.json`, for example `"Sign In": "登录"`. A text with no entry shows in English.

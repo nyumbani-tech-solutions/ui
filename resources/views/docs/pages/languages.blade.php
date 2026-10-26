@@ -5,7 +5,7 @@
 
 @section('content')
     <x-docs::section id="enable" title="Offer more languages">
-        <p>List the languages in <code>config/ui.php</code> as <code>code => label</code>. With more than one, the UI shows a switch on the sign-in pages and in the navbar, keeps the visitor's choice in the session and applies it on every web request. With one (the default), nothing is shown and nothing runs.</p>
+        <p>List the languages in <code>config/ui.php</code> as <code>code => label</code>. With more than one, the UI shows a switch on the sign-in pages and in the navbar, keeps the visitor's choice in a cookie for a year, so a logout does not lose it, and applies it on every web request. With one (the default), nothing is shown and nothing runs.</p>
         <x-docs::code lang="php" title="config/ui.php">
             'locales' => [
                 'en' => 'EN',

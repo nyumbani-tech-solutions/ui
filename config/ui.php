@@ -22,7 +22,7 @@ return [
     |
     | The languages the app offers, as code => label. With more than one the UI
     | shows a language switch on the sign-in pages and in the navbar, and keeps
-    | the choice in the session. The package text is English; an app translates
+    | the choice in a cookie, which survives a logout. The package text is English; an app translates
     | it in its own lang/{code}.json, keyed by the English text.
     |
     */
