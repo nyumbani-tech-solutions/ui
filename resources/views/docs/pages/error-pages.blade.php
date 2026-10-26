@@ -14,7 +14,7 @@
             ['500', 'Oops, something went wrong'],
             ['503', 'Back in a moment'],
         ]" />
-        <p>Each page has the Nyumbani logo, the status code in a gradient, and an action: Sign in, Take me home, Go back or Try again.</p>
+        <p>Each page has the Nyumbani logo, the status code in a gradient, and an action: Sign in, Take me home, Go back or Try again. Go back is a link the server builds from the page you came from, or the home page when there is none, so it works without JavaScript. The 419 page has no Try again, because reloading an expired page would only send the old token again.</p>
             <x-docs::example title="Live: every error page, as a user sees it">
             <div x-data="{ code: '404' }">
                 <div class="mb-3 flex flex-wrap gap-1.5">
