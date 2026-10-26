@@ -49,7 +49,7 @@
             <input id="email" name="email" type="email" value="{{ old('email') }}" placeholder="e.g. jane@example.com" aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}" required>
             @endverbatim
         </x-docs::code>
-        <p>Controls are 16px on phones and 14px from the <code>sm</code> breakpoint up. A smaller font makes iOS Safari zoom the page in when a field is focused, so do not shrink a control's text with <code>text-sm</code> or <code>text-xs</code> in your own markup, and do not stop the zoom with <code>maximum-scale</code> in the viewport, which also takes pinch-to-zoom away from people who need it. The data tables' search box and page length follow the same rule.</p>
+        <p>Controls are 16px on phones and 14px from the <code>sm</code> breakpoint up, and the layout's viewport is <code>width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no</code>, so a Nyumbani page does not zoom when a field is focused or on a pinch. Keep that font size: do not shrink a control's text with <code>text-sm</code> or <code>text-xs</code> in your own markup. The data tables' search box and page length follow the same rule.</p>
         <p>Put an icon span before an input, or a password toggle after it, and the input makes room for it: <code>&lt;span data-icon&gt;</code> before gives left padding, and a following <code>[data-password-toggle]</code> gives right padding.</p>
     </x-docs::section>
 

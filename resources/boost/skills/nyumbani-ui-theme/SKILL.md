@@ -27,7 +27,7 @@ Props: `message` (default "Nyumbani is processing your data...") and `size` (`sm
 
 ## Components
 - `<x-nyumbani::modal>`: see the nyumbani-modal skill.
-- Form controls are 16px on phones and 14px from `sm` up, because iOS Safari zooms the page in when a focused control has a smaller font. Never add `text-sm` or `text-xs` to an input, select or textarea, and never add `maximum-scale` or `user-scalable=no` to the viewport, which blocks pinch-to-zoom.
+- Form controls are 16px on phones and 14px from `sm` up, and the layout's viewport is `width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no`, so pages do not zoom on focus or on a pinch. Never add `text-sm` or `text-xs` to an input, select or textarea, and keep that viewport meta when you write your own base layout.
 - `<x-nyumbani::file-input name="..." label="..." accept="..." :current="$upload" />`, where `$upload` is the saved Upload model (it supplies `url`, `title`, `formattedSize` and `isImage()`). The form needs `enctype="multipart/form-data"`.
 - `<x-nyumbani::nav-group>` and `<x-nyumbani::nav-link>` build the sidebar. Implement the `HasHomeRoute` contract for the home link.
 - Every top-level `nav-link` and `nav-group` needs an icon: put the `<path>` elements of a 24x24 outline Heroicon (Outline set, Copy SVG, paths only, never the `<svg>`) in the link's slot, or in `<x-slot:icon>` of a group. Links inside a group use `sub` and take no icon. The component draws the svg with stroke width 2.
