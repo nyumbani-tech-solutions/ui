@@ -23,7 +23,7 @@
 		"nyumbani/essentials": "^1.12"
 	},
 	"require-dev": {
-		"nyumbani/docs": "^1.1"
+		"nyumbani/docs": "^1.2"
 	},
 	"suggest": {
 		"nyumbani/docs": "The local-only guides of the UI package, installed with composer require --dev nyumbani/docs"
