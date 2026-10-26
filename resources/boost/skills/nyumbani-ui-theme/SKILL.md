@@ -37,3 +37,6 @@ Props: `message` (default "Nyumbani is processing your data...") and `size` (`sm
 - No `@php` in views. Prepare data in a controller or component class.
 - Use `@use` for every class a view references.
 - After adding Tailwind classes in a package view, run `npm run build` in the app.
+
+## Placeholders
+Every form input has a `placeholder`, never just the label: a prompt (`Enter your name here`), an example (`e.g. Jane Wanjiru`) or the rule (`At least 8 characters`). A `<select>` gets an empty first option as its placeholder. Checkbox, radio, file, hidden, date, time and colour inputs are exempt. Translate placeholders and never write a currency in one.

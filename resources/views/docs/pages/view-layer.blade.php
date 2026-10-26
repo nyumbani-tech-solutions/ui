@@ -38,8 +38,11 @@
     </x-docs::section>
 
     <x-docs::section id="forms" title="Forms and confirmations">
+        <x-docs::rule title="Every form input has a placeholder">
+            <p>Every form input carries a <code>placeholder</code>, never just the label. It is a prompt (<code>Enter your name here</code>), an example of text that would fit (<code>e.g. Jane Wanjiru</code>) or the rule for the input (<code>At least 8 characters</code>). Choose the one that helps most, and do not repeat the label. Text, email, tel, password, number and search inputs and every textarea need one. A select gets an empty first option as its placeholder (<code>&lt;option value=""&gt;Select a status&lt;/option&gt;</code>). Checkboxes, radios, file, hidden, date, time and colour inputs are exempt. Placeholders are translated like any other copy and never name a currency (<code>e.g. 1000</code>).</p>
+        </x-docs::rule>
         <x-docs::rule title="Forms">
-            <p>Every text-like input has a helpful placeholder: an example, the expected format, or what a blank value means, never just the label. Required labels carry <code>aria-required="true"</code>. Forms never carry a hidden tenant id.</p>
+            <p>Required labels carry <code>aria-required="true"</code>. Forms never carry a hidden tenant id.</p>
         </x-docs::rule>
         <x-docs::rule title="The double-submit guard">
             <p>Every submit button is disabled and shows a spinner once its form is submitted, by the package's submit script. Do not add your own guard. Opt a button out with <code>data-allow-resubmit</code> only when something else runs its busy state. Dispatch <code>reset-loading</code> on the form to restore a button after an AJAX submit. Never call <code>form.submit()</code>; use <code>requestSubmit()</code>, and never from inside a <code>submit</code> listener on the same form.</p>
