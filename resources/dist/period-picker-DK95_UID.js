@@ -1223,7 +1223,7 @@ var Z = (e) => e.split("-").map(Number), Q = (e, t, n) => new Date(e, t - 1, 1).
 };
 document.addEventListener("alpine:init", () => {
 	Alpine.data("periodPicker", (e) => {
-		let t = {};
+		let t = {}, n;
 		return {
 			value: e.period,
 			presets: e.presets,
@@ -1233,7 +1233,7 @@ document.addEventListener("alpine:init", () => {
 			editing: null,
 			popover: {},
 			init() {
-				this.syncDraft(), this.$watch("open", (e) => {
+				n = this.$el, this.syncDraft(), this.$watch("open", (e) => {
 					this.editing = null, e && this.syncDraft();
 				});
 			},
@@ -1327,10 +1327,13 @@ document.addEventListener("alpine:init", () => {
 				}));
 			},
 			announce() {
-				this.$nextTick(() => this.$dispatch("period-changed", {
-					name: e.name,
-					value: this.value
-				}));
+				this.$nextTick(() => n.dispatchEvent(new CustomEvent("period-changed", {
+					detail: {
+						name: e.name,
+						value: this.value
+					},
+					bubbles: !0
+				})));
 			}
 		};
 	});

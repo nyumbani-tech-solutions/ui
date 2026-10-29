@@ -79,6 +79,9 @@ document.addEventListener('alpine:init', () => {
         //  The calendars by the end they pick, kept out of the reactive state so Alpine never wraps them
         const calendars = {};
 
+        //  The element the picker sits on, which announces its changes: Alpine's $dispatch starts from the element that ran the code, and the modal's buttons live in the body, outside the page's forms
+        let root;
+
         return {
             value: config.period,
             presets: config.presets,
@@ -92,6 +95,9 @@ document.addEventListener('alpine:init', () => {
              * Copy the committed range into the draft whenever the modal opens
              */
             init() {
+                //  Keep the element the picker sits on
+                root = this.$el;
+
                 //  Start the draft on the committed range
                 this.syncDraft();
 
@@ -332,7 +338,10 @@ document.addEventListener('alpine:init', () => {
              */
             announce() {
                 //  Wait for the hidden input to take the new value, so a listener that submits the form sends it
-                this.$nextTick(() => this.$dispatch('period-changed', { name: config.name, value: this.value }));
+                this.$nextTick(() => root.dispatchEvent(new CustomEvent('period-changed', {
+                    detail: { name: config.name, value: this.value },
+                    bubbles: true,
+                })));
             },
         };
     });
