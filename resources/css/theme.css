@@ -154,19 +154,19 @@
     }
 }
 
-/* The period picker's calendar (Vanilla Calendar Pro) takes the Nyumbani primary colour for what is selected, today and the weekends */
+/* The period picker's calendar (Vanilla Calendar Pro) takes the Nyumbani colours: what is selected matches the primary buttons, and today and the weekends use the primary shades */
 .vc[data-vc=calendar] {
-    --vc-date-selected-bg: var(--color-primary);
+    --vc-date-selected-bg: var(--color-primary-darker);
     --vc-date-selected-color: #fff;
     --vc-date-today-color: var(--color-primary-dark);
-    --vc-months-years-bg-selected: var(--color-primary);
+    --vc-months-years-bg-selected: var(--color-primary-darker);
     --vc-months-years-color-selected: #fff;
     --vc-focus-outline-color: var(--color-primary);
 
     /* Weekends take the primary colour too, in place of the library's rose */
     --vc-date-weekend-color: var(--color-primary-dark);
     --vc-date-weekend-today-color: var(--color-primary-dark);
-    --vc-date-weekend-selected-bg: var(--color-primary);
+    --vc-date-weekend-selected-bg: var(--color-primary-darker);
     --vc-date-weekend-selected-color: #fff;
     --vc-date-weekend-hover-bg: color-mix(in srgb, var(--color-primary) 10%, white);
     --vc-date-weekend-bg-hover: color-mix(in srgb, var(--color-primary) 10%, white);
@@ -206,4 +206,13 @@
 .vc:not([data-vc-type=month]) + [data-period-hint=month],
 .vc:not([data-vc-type=default]) + [data-period-hint=day] {
     display: none;
+}
+
+/* A period picker field with its calendar icon attached has no left border or corners. This sits in the base layer after the form rules, because their important declarations beat utility classes, however important */
+@layer base {
+    input.period-field-attached, select.period-field-attached {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-left-width: 0 !important;
+    }
 }

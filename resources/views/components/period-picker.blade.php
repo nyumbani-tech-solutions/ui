@@ -87,15 +87,29 @@
             </x-slot:action>
         </x-nyumbani::modal>
     @elseif ($unit === 'year')
-        <select class="w-full" aria-label="{{ $placeholder }}" x-bind:value="value" x-on:change="choose($event.target.value)">
-            <option value="">{{ $placeholder }}</option>
-            @foreach ($years as $year)
-                <option value="{{ $year }}" @selected($period === (string) $year)>{{ $year }}</option>
-            @endforeach
-        </select>
+        <div class="flex items-stretch">
+            @if ($icon)
+                <span class="pointer-events-none flex shrink-0 items-center justify-center rounded-l-sm px-3 text-white {{ $iconBg }}" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>
+                </span>
+            @endif
+            <select @class(['w-full', 'period-field-attached' => $icon]) aria-label="{{ $placeholder }}" x-bind:value="value" x-on:change="choose($event.target.value)">
+                <option value="">{{ $placeholder }}</option>
+                @foreach ($years as $year)
+                    <option value="{{ $year }}" @selected($period === (string) $year)>{{ $year }}</option>
+                @endforeach
+            </select>
+        </div>
     @else
         <div x-on:click.outside="editing === 'value' && (editing = null)" x-on:keydown.escape="editing === 'value' && ($event.stopPropagation(), editing = null)">
-            <input type="text" readonly inputmode="none" class="w-full cursor-pointer" placeholder="{{ $placeholder }}" aria-label="{{ $placeholder }}" aria-haspopup="dialog" x-bind:aria-expanded="editing === 'value'" x-bind:value="fieldLabel('value')" x-on:click="toggle('value', $el)" x-on:keydown.enter.prevent="toggle('value', $el)">
+            <div x-ref="group" class="flex items-stretch">
+                @if ($icon)
+                    <button type="button" tabindex="-1" aria-label="{{ __('Open the calendar') }}" class="flex shrink-0 cursor-pointer items-center justify-center rounded-l-sm px-3 text-white {{ $iconBg }}" x-on:click="toggle('value', $refs.group)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>
+                    </button>
+                @endif
+                <input type="text" readonly inputmode="none" @class(['w-full cursor-pointer', 'period-field-attached' => $icon]) placeholder="{{ $placeholder }}" aria-label="{{ $placeholder }}" aria-haspopup="dialog" x-bind:aria-expanded="editing === 'value'" x-bind:value="fieldLabel('value')" x-on:click="toggle('value', $refs.group)" x-on:keydown.enter.prevent="toggle('value', $refs.group)">
+            </div>
             <div x-show="editing === 'value'" x-cloak x-bind:style="popoverStyle" class="fixed z-40">
                 <div x-effect="syncCalendar('value')" x-init="mountCalendar($el, 'value')"></div>
                 <p data-period-hint="{{ $unit }}" class="rounded-b border border-gray-200 bg-gray-50 px-3 py-2 text-center text-xs text-gray-500 shadow-lg">{{ $unit === 'month' ? __('Click the year to pick another year') : __('Click the month or year to jump to another') }}</p>

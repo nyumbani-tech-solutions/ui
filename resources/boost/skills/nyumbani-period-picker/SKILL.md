@@ -46,6 +46,8 @@ Payment::query()->whereBetween('paid_at', [$period->from, $period->to])->get();
 | `min-year`, `max-year` | 15 years back, this year | The years a year picker offers. They widen to hold the starting period and the presets |
 | `placeholder` | per type | The text before a period is chosen |
 | `title` | `Choose a period` | The heading of a range picker's modal |
+| `icon` | `true` | Shows a calendar icon attached to the field of a day, month or year picker; tapping it opens the calendar. `:icon="false"` leaves a plain field |
+| `icon-bg` | the theme's button colour | Classes that colour the icon (`bg-secondary hover:bg-secondary-dark`), replacing the default `bg-primary-darker hover:bg-primary-dark`. The icon stays white; write the classes out in full so Tailwind finds them |
 
 Default presets: `day-range` has Today, Yesterday, Last 7 days, Last 30 days, This month, Last month, This year and Last year (the last-N ranges end today). `month-range` has This month, Last 3, 6 and 12 months, This year and Last year. `year-range` has This year, Last 3 years and Last 5 years. A single type has no presets. Pass your own list to replace them.
 

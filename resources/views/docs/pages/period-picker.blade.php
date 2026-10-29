@@ -84,6 +84,17 @@
         </x-docs::example>
     </x-docs::section>
 
+    <x-docs::section id="icon" title="The calendar icon">
+        <p>A day, month or year picker shows a calendar icon attached to the left of its field, in the same colours as the theme's buttons. Tapping the icon opens the calendar. Switch it off with <code>:icon="false"</code>, or recolour it with <code>icon-bg</code>.</p>
+        <x-docs::example title="Live: the default icon, a recoloured one, and none">
+            <div class="grid gap-3 sm:grid-cols-3">
+                <x-nyumbani::period-picker type="day" name="docs-icon-default" />
+                <x-nyumbani::period-picker type="month" name="docs-icon-custom" icon-bg="bg-secondary hover:bg-secondary-dark" />
+                <x-nyumbani::period-picker type="year" name="docs-icon-none" :icon="false" />
+            </div>
+        </x-docs::example>
+    </x-docs::section>
+
     <x-docs::section id="calendar" title="The calendars">
         <p>Days and months are picked on a <a href="https://vanilla-calendar.pro" target="_blank" rel="noopener">Vanilla Calendar Pro</a> calendar. The field is read-only, so a phone never raises the keyboard, and it shows the date in plain words, such as <strong>14 Mar 2026</strong>.</p>
         <x-docs::table :columns="['Behaviour', 'Detail']" :rows="[
@@ -178,6 +189,8 @@
             ['min-year, max-year', '15 years back, this year', 'The years a year picker offers. They widen to hold the starting period and the presets.'],
             ['placeholder', 'per type', 'The text before a period is chosen.'],
             ['title', 'Choose a period', 'The heading of a range picker\'s modal.'],
+            ['icon', 'true', 'Shows a calendar icon attached to the field of a day, month or year picker. Tapping it opens the calendar. False leaves a plain field.'],
+            ['icon-bg', 'the theme\'s button colour', 'The classes that colour the icon, such as bg-secondary. They replace the default bg-primary-darker hover:bg-primary-dark, and the icon stays white. Write them out in full so Tailwind finds them.'],
         ]" />
         <p>The picker keeps its state under <code>value</code>, <code>from</code>, <code>to</code> and <code>open</code>, so avoid those names in an Alpine scope that wraps it.</p>
     </x-docs::section>

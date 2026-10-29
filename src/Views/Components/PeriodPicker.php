@@ -53,7 +53,7 @@ class PeriodPicker extends Component
     public array $years;
 
     /**
-     * Create the picker, with presets given as a list of label and period pairs
+     * Create the picker, with presets given as a list of label and period pairs, and the calendar icon on its fields shown or hidden and given a background class
      *
      * @author Alvin G. Kaburu <geekaburu@nyumbanitech.co.ke>
      */
@@ -66,6 +66,8 @@ class PeriodPicker extends Component
         public ?int $maxYear = null,
         public ?string $placeholder = null,
         public ?string $title = null,
+        public bool $icon = true,
+        public ?string $iconBg = null,
     ) {
         //  Refuse a type the picker does not know
         if (! array_key_exists($type, self::TYPES)) {
@@ -94,6 +96,9 @@ class PeriodPicker extends Component
 
         //  Title the modal of a range, unless the app gave its own text
         $this->title ??= __('Choose a period');
+
+        //  Colour the icon like the theme's buttons, unless the app gave its own classes
+        $this->iconBg ??= 'bg-primary-darker hover:bg-primary-dark';
 
         //  Offer presets on a range only, the app's own or the defaults for its unit
         $this->presets = $this->isRange ? ($presets ?? $this->defaultPresets()) : [];
