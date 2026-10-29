@@ -19,5 +19,10 @@ export default defineConfig({
             fileName: (format, name) => `${name}.js`,
             cssFileName: 'ui',
         },
+        rolldownOptions: {
+            output: {
+                comments: { annotation: false },
+            },
+        },
     },
 });

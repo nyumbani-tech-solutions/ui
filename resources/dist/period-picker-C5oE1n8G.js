@@ -1,5 +1,5 @@
 // node_modules/vanilla-calendar-pro/index.mjs
-var e = (e) => /* @__PURE__ */ new Date(`${e}T00:00:00`), t = (e) => `${e.getFullYear()}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`, n = (n, r) => n.reduce((n, i) => {
+var e = (e) => new Date(`${e}T00:00:00`), t = (e) => `${e.getFullYear()}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`, n = (n, r) => n.reduce((n, i) => {
 	if (i instanceof Date || typeof i == "number") {
 		let e = i instanceof Date ? i : new Date(i);
 		n.push(t(e));
@@ -25,7 +25,7 @@ var e = (e) => /* @__PURE__ */ new Date(`${e}T00:00:00`), t = (e) => `${e.getFul
 		values: e.slice(),
 		set: new Set(e)
 	};
-}, i = /* @__PURE__ */ new WeakMap(), a = (e) => {
+}, i = new WeakMap(), a = (e) => {
 	var t;
 	let a = (t = e.selectedHolidays) != null && t[0] ? e.selectedHolidays : [], o = JSON.stringify(a.map((e) => e instanceof Date ? e.getTime() : e)), s = i.get(e);
 	i.set(e, {
@@ -45,13 +45,13 @@ var e = (e) => /* @__PURE__ */ new Date(`${e}T00:00:00`), t = (e) => `${e.getFul
 	"annotations",
 	"weeks",
 	"months"
-], c = /* @__PURE__ */ new WeakMap(), l = {}, u = /* @__PURE__ */ Object.freeze([]), d = (e) => c.get(e) ?? l, f = (e, t = e) => {
+], c = new WeakMap(), l = {}, u = Object.freeze([]), d = (e) => c.get(e) ?? l, f = (e, t = e) => {
 	if (t.extensions && t.extensions !== e.extensions && (new Set(t.extensions).size !== e.extensions.length || t.extensions.some((t) => !e.extensions.includes(t)))) throw Error("Calendar extensions are fixed at construction. Create a new Calendar to change them.");
 	let n = d(e), r = (e, t, r) => {
 		if (e && !n[t]) throw Error(`The "${r}" option requires ${t}. Import { ${t} } from 'vanilla-calendar-pro' and add it to extensions: [${t}].`);
 	};
 	r(t.animation || t.enableSwipe, "motion", t.animation ? "animation" : "enableSwipe"), r(t.selectionTimeMode, "time", "selectionTimeMode"), r(t.popups && Object.keys(t.popups).length || t.onCreateDateRangeTooltip, "annotations", t.onCreateDateRangeTooltip ? "onCreateDateRangeTooltip" : "popups"), r(t.type === "multiple", "months", "type"), r(t.type === "week" || t.enableCollapse || t.enableWeekNumbers || t.onClickWeekDay, "weeks", t.type === "week" ? "type" : t.enableCollapse ? "enableCollapse" : t.enableWeekNumbers ? "enableWeekNumbers" : "onClickWeekDay");
-}, p = (e, t, n) => d(e).annotations?.tooltip(e, t, n), m = /* @__PURE__ */ new WeakMap(), h = (e) => {
+}, p = (e, t, n) => d(e).annotations?.tooltip(e, t, n), m = new WeakMap(), h = (e) => {
 	let t = m.get(e);
 	return t || (t = {
 		lastDateEl: null,
@@ -145,7 +145,7 @@ var e = (e) => /* @__PURE__ */ new Date(`${e}T00:00:00`), t = (e) => `${e.getFul
 			})()), r.disableDatesGaps && (_(r, "displayDateMin", o.rangeMin), _(r, "displayDateMax", o.rangeMax)), r.onCreateDateRangeTooltip && p(r, o.tooltipEl, r.context.selectedDates[0] ? i : null);
 		}
 	})[r.context.selectedDates.length === 1 ? "set" : "reset"]();
-}, C = (e) => e.getRootNode ? e.getRootNode() : document, w = /* @__PURE__ */ new WeakSet(), T = "data-vc-prev-tabindex", ee = (e) => e.tabIndex >= 0 && !e.hasAttribute("disabled") && e.getAttribute("aria-disabled") !== "true", te = (e) => {
+}, C = (e) => e.getRootNode ? e.getRootNode() : document, w = new WeakSet(), T = "data-vc-prev-tabindex", ee = (e) => e.tabIndex >= 0 && !e.hasAttribute("disabled") && e.getAttribute("aria-disabled") !== "true", te = (e) => {
 	if (e.hasAttribute(T)) return;
 	let t = e.getAttribute("tabindex");
 	e.setAttribute(T, t ?? "");
@@ -267,7 +267,7 @@ var se = (e, t, n) => {
 		left: `${u}px`,
 		top: `${l}px`
 	});
-}, D = /* @__PURE__ */ new WeakMap(), O = (e) => {
+}, D = new WeakMap(), O = (e) => {
 	clearTimeout(D.get(e)), D.delete(e);
 }, ce = (e) => {
 	O(e), D.set(e, setTimeout(() => {
@@ -299,7 +299,7 @@ var se = (e, t, n) => {
 	">": "&gt;",
 	"\"": "&quot;",
 	"'": "&#39;"
-})[e]), fe = (e, t) => `\n  <div class="${k(e.styles.header)}" data-vc="header" role="group" aria-label="${k(e.labels.navigation)}">\n${t ? `    <#ArrowPrev [${t}] />\n` : ""}    <div class="${k(e.styles.headerContent)}" data-vc-header="content" aria-live="polite" aria-atomic="true">\n      <#Month />\n      <#Year />\n    </div>\n${t ? `    <#ArrowNext [${t}] />\n` : ""}  </div>\n`, pe = (e, t = "month") => `${fe(e, t)}  <div class="${k(e.styles.wrapper)}" data-vc="wrapper">\n    <#WeekNumbers />\n    <div class="${k(e.styles.content)}" data-vc="content" role="grid">\n      <#Week />\n      <#Dates />\n      <#DateRangeTooltip />\n    </div>\n  </div>\n  <#Collapse />\n  <#ControlTime />\n`, me = (e) => e, A = /* @__PURE__ */ new WeakMap(), j = (e) => {
+})[e]), fe = (e, t) => `\n  <div class="${k(e.styles.header)}" data-vc="header" role="group" aria-label="${k(e.labels.navigation)}">\n${t ? `    <#ArrowPrev [${t}] />\n` : ""}    <div class="${k(e.styles.headerContent)}" data-vc-header="content" aria-live="polite" aria-atomic="true">\n      <#Month />\n      <#Year />\n    </div>\n${t ? `    <#ArrowNext [${t}] />\n` : ""}  </div>\n`, pe = (e, t = "month") => `${fe(e, t)}  <div class="${k(e.styles.wrapper)}" data-vc="wrapper">\n    <#WeekNumbers />\n    <div class="${k(e.styles.content)}" data-vc="content" role="grid">\n      <#Week />\n      <#Dates />\n      <#DateRangeTooltip />\n    </div>\n  </div>\n  <#Collapse />\n  <#ControlTime />\n`, me = (e) => e, A = new WeakMap(), j = (e) => {
 	var t;
 	(t = A.get(e)) == null || t.observer.disconnect(), A.delete(e);
 }, M = j, he = (e) => !(e.animation || e.enableCollapse || e.onCreateDateEls || e.onCreateDateRangeTooltip || e.disableDatesGaps || e.popups && Object.keys(e.popups).length || e.sanitizerHTML !== me || e.context.currentType !== "default" && e.context.currentType !== "multiple" || e.layouts[e.context.currentType] !== (e.context.currentType === "multiple" ? d(e).months?.layout(e) : pe(e))), ge = (e) => JSON.stringify(Object.entries(e).filter(([e]) => e !== "context" && e !== "selectedDates"), (e, t) => typeof t == "function" || t), _e = ({ context: e }) => JSON.stringify([
@@ -365,7 +365,7 @@ var se = (e, t, n) => {
 	N(r, d, "data-vc-date-disabled"), i && N(i, d, "aria-disabled", "true"), i && d && N(i, !0, "tabindex", "-1"), i && i.disabled !== !!d && (i.disabled = !!d), N(r, !t.disableToday && t.context.dateToday === s, "data-vc-date-today"), N(r, !t.disableToday && t.context.dateToday === s, "aria-current", "date"), N(r, t.selectedWeekends?.includes(a), "data-vc-date-weekend"), N(r, u.holidays.has(s), "data-vc-date-holiday");
 	let p = u.selected.set.has(s), m = p ? "" : void 0;
 	p ? (N(r, !0, "aria-selected", "true"), t.context.selectedDates.length > 1 && t.selectionDatesMode === "multiple-ranged" && (t.context.selectedDates[0] === s && t.context.selectedDates[t.context.selectedDates.length - 1] === s ? m = "first-and-last" : t.context.selectedDates[0] === s ? m = "first" : t.context.selectedDates[t.context.selectedDates.length - 1] === s && (m = "last"), t.context.selectedDates[0] !== s && t.context.selectedDates[t.context.selectedDates.length - 1] !== s && (m = "middle"))) : r.hasAttribute("data-vc-date-selected") && r.removeAttribute("aria-selected"), !u.disabled.set.has(s) && t.enableEdgeDatesOnly && t.context.selectedDates.length > 1 && t.selectionDatesMode === "multiple-ranged" && (l > u.first && l < u.last ? m = "middle" : m === "middle" && (m = void 0)), m === void 0 ? r.hasAttribute("data-vc-date-selected") && r.removeAttribute("data-vc-date-selected") : N(r, !0, "data-vc-date-selected", m);
-}, P = /* @__PURE__ */ new Map(), F = /* @__PURE__ */ new Map(), Se = (e, t, n) => {
+}, P = new Map(), F = new Map(), Se = (e, t, n) => {
 	var r;
 	let i = e.disableWeekdays?.includes(n), a = e.disableAllDates && !((r = e.context.enableDates) == null || !r[0]), s = o(e);
 	if ((i || a) && !s.enabled.set.has(t) && !s.disabled.set.has(t)) {
@@ -391,7 +391,7 @@ var se = (e, t, n) => {
 			dateStyle: "long",
 			timeZone: "UTC"
 		}), P.size >= 8 && P.delete(P.keys().next().value), P.set(t, i));
-		let a = i.format(/* @__PURE__ */ new Date(`${e}T00:00:00.000Z`));
+		let a = i.format(new Date(`${e}T00:00:00.000Z`));
 		return F.size >= 512 && F.delete(F.keys().next().value), F.set(n, a), a;
 	})(o, f), l.innerText = String(i), p.appendChild(l)), t.enableWeekNumbers && ((c = d(t).weeks) == null || c.date(t, p, o)), Se(t, o, u), xe(t, n, p, l, u, o, s), r.addDate(p), t.onCreateDateEls && (t.onCreateDateEls(t, p), a(t));
 }, we = [
@@ -617,7 +617,7 @@ var se = (e, t, n) => {
 		s?.appendChild(d), t.onCreateYearEls && t.onCreateYearEls(t, d);
 	}
 	I(t);
-}, U = /* @__PURE__ */ new WeakMap(), ze = (e) => {
+}, U = new WeakMap(), ze = (e) => {
 	var t, n;
 	let r = window.matchMedia("(prefers-color-scheme)").media !== "not all";
 	var i, a;
@@ -696,7 +696,7 @@ function K(e) {
 	}
 	return e;
 }
-var q = /* @__PURE__ */ new Map(), J = (e, t, n) => {
+var q = new Map(), J = (e, t, n) => {
 	let r = new Intl.DateTimeFormat(e, {
 		[t]: n,
 		timeZone: "UTC"
@@ -910,7 +910,7 @@ var q = /* @__PURE__ */ new Map(), J = (e, t, n) => {
 		})(e, t), (r = d(e).weeks) == null || r.collapseClick(e, t);
 	};
 	return e.context.mainElement.addEventListener("click", t), () => e.context.mainElement.removeEventListener("click", t);
-}, et = /* @__PURE__ */ new WeakMap(), tt = (e, t) => {
+}, et = new WeakMap(), tt = (e, t) => {
 	let r = e[t].map((e) => e instanceof Date ? e.getTime() : e), i = et.get(e), a = i?.[t];
 	if (a && r.length === a.values.length) {
 		let e = 0;
@@ -928,9 +928,8 @@ var q = /* @__PURE__ */ new Map(), J = (e, t, n) => {
 	} else i && delete i[t];
 	return o;
 }, X = (e, t) => e === "today" ? (() => {
-	let e = /* @__PURE__ */ new Date();
-	/* @__PURE__ */
-	return (/* @__PURE__ */ new Date(e.getTime() - 6e4 * e.getTimezoneOffset())).toISOString().substring(0, 10);
+	let e = new Date();
+	return new Date(e.getTime() - 6e4 * e.getTimezoneOffset()).toISOString().substring(0, 10);
 })() : e instanceof Date || typeof e == "number" || typeof e == "string" ? n([e])[0] : t, nt = (e, t, n) => {
 	_(e, "selectedMonth", t), _(e, "selectedYear", n), _(e, "displayYear", n);
 }, rt = (t) => {
@@ -959,7 +958,7 @@ var q = /* @__PURE__ */ new Map(), J = (e, t, n) => {
 				let n = new Date(e);
 				nt(t, n.getMonth(), n.getFullYear());
 			};
-			return t.displayDateMin && t.displayDateMin !== "today" && (i = t.displayDateMin, a = /* @__PURE__ */ new Date(), new Date(i).getTime() > a.getTime()) ? (r(e(X(t.selectedDates.length && t.selectedDates[0] ? n(t.selectedDates)[0] : t.displayDateMin, t.displayDateMin))), !0) : !(!t.displayDateMax || t.displayDateMax === "today" || !((e, t) => new Date(e).getTime() < t.getTime())(t.displayDateMax, /* @__PURE__ */ new Date()) || (r(e(X(t.selectedDates.length && t.selectedDates[0] ? n(t.selectedDates)[0] : t.displayDateMax, t.displayDateMax))), 0));
+			return t.displayDateMin && t.displayDateMin !== "today" && (i = t.displayDateMin, a = new Date(), new Date(i).getTime() > a.getTime()) ? (r(e(X(t.selectedDates.length && t.selectedDates[0] ? n(t.selectedDates)[0] : t.displayDateMin, t.displayDateMin))), !0) : !(!t.displayDateMax || t.displayDateMax === "today" || !((e, t) => new Date(e).getTime() < t.getTime())(t.displayDateMax, new Date()) || (r(e(X(t.selectedDates.length && t.selectedDates[0] ? n(t.selectedDates)[0] : t.displayDateMax, t.displayDateMax))), 0));
 			var i, a;
 		})(t)) return;
 		let i = t.selectedMonth !== void 0 && Number(t.selectedMonth) >= 0 && Number(t.selectedMonth) < 12, a = t.selectedYear !== void 0 && Number(t.selectedYear) >= 0 && Number(t.selectedYear) <= 9999;
@@ -1205,7 +1204,7 @@ var q = /* @__PURE__ */ new Map(), J = (e, t, n) => {
 		return e.memoizedElements.set(t, n), n;
 	}
 };
-G(dt, "memoizedElements", /* @__PURE__ */ new Map());
+G(dt, "memoizedElements", new Map());
 // resources/js/period-picker.js
 var Z = (e) => e.split("-").map(Number), Q = (e, t, n) => new Date(e, t - 1, 1).toLocaleDateString("en-KE", { month: n }), $ = (e, t) => {
 	let [n, r, i] = Z(e);

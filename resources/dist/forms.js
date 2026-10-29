@@ -1,6 +1,6 @@
 import { a as e, t } from "./rolldown-runtime-DUcC5eAW.js";
 // node_modules/mini-svg-data-uri/shorter-css-color-names.js
-var n = /* @__PURE__ */ t(((e, t) => {
+var n = t(((e, t) => {
 	t.exports = {
 		aqua: /#00ffff(ff)?(?!\w)|#0ff(f)?(?!\w)/gi,
 		azure: /#f0ffff(ff)?(?!\w)/gi,
@@ -57,7 +57,7 @@ var n = /* @__PURE__ */ t(((e, t) => {
 		wheat: /#f5deb3(ff)?(?!\w)/gi,
 		white: /#ffffff(ff)?(?!\w)|#fff(f)?(?!\w)/gi
 	};
-})), r = /* @__PURE__ */ t(((e, t) => {
+})), r = t(((e, t) => {
 	var r = n(), i = {
 		whitespace: /\s+/g,
 		urlHexPairs: /%[\dA-F]{2}/g,
@@ -90,7 +90,7 @@ var n = /* @__PURE__ */ t(((e, t) => {
 	l.toSrcset = function(e) {
 		return l(e).replace(/ /g, "%20");
 	}, t.exports = l;
-})), i = /* @__PURE__ */ t(((e, t) => {
+})), i = t(((e, t) => {
 	function n(e, t) {
 		return {
 			handler: e,
@@ -106,8 +106,8 @@ var n = /* @__PURE__ */ t(((e, t) => {
 		}
 		return n.__isOptionsFunction = !0, n;
 	}, t.exports = n;
-})), a = /* @__PURE__ */ t(((e, t) => {
-	var n = /* @__PURE__ */ new Uint8Array(256);
+})), a = t(((e, t) => {
+	var n = new Uint8Array(256);
 	function r(e, t) {
 		let r = 0, i = [], a = 0, o = e.length, s = t.charCodeAt(0);
 		for (let t = 0; t < o; t++) {
@@ -142,7 +142,7 @@ var n = /* @__PURE__ */ t(((e, t) => {
 		return i.push(e.slice(a)), i;
 	}
 	var i = /[+-]?\d*\.?\d+(?:[eE][+-]?\d+)?/;
-	RegExp(`^${i.source}$`), RegExp(`^${i.source}%$`), RegExp(`^${i.source}\\s*/\\s*${i.source}$`), RegExp(`^${i.source}(${(/* @__PURE__ */ "cm.mm.Q.in.pc.pt.px.em.ex.ch.rem.lh.rlh.vw.vh.vmin.vmax.vb.vi.svw.svh.lvw.lvh.dvw.dvh.cqw.cqh.cqi.cqb.cqmin.cqmax".split(".")).join("|")})$`), RegExp(`^${i.source}(deg|rad|grad|turn)$`), RegExp(`^${i.source} +${i.source} +${i.source}$`);
+	RegExp(`^${i.source}$`), RegExp(`^${i.source}%$`), RegExp(`^${i.source}\\s*/\\s*${i.source}$`), RegExp(`^${i.source}(${"cm.mm.Q.in.pc.pt.px.em.ex.ch.rem.lh.rlh.vw.vh.vmin.vmax.vb.vi.svw.svh.lvw.lvh.dvw.dvh.cqw.cqh.cqi.cqb.cqmin.cqmax".split(".").join("|")})$`), RegExp(`^${i.source}(deg|rad|grad|turn)$`), RegExp(`^${i.source} +${i.source} +${i.source}$`);
 	function a(e) {
 		let t = Number(e);
 		return Number.isInteger(t) && t >= 0 && String(t) === String(e);
@@ -1584,7 +1584,7 @@ var n = /* @__PURE__ */ t(((e, t) => {
 			...c
 		}
 	};
-})), o = /* @__PURE__ */ t(((e, t) => {
+})), o = t(((e, t) => {
 	t.exports = {
 		inherit: "inherit",
 		current: "currentcolor",
@@ -1930,7 +1930,7 @@ var n = /* @__PURE__ */ t(((e, t) => {
 			950: "oklch(27.1% 0.105 12.094)"
 		}
 	};
-})), s = (/* @__PURE__ */ e((/* @__PURE__ */ t(((e, t) => {
+})), s = e(t(((e, t) => {
 	var n = r(), s = i(), c = a(), l = o(), [u, { lineHeight: d }] = c.fontSize.base, { spacing: f, borderWidth: p, borderRadius: m } = c;
 	function h(e, t) {
 		return e.replace("<alpha-value>", `var(${t}, 1)`);
@@ -2208,5 +2208,5 @@ var n = /* @__PURE__ */ t(((e, t) => {
 			o.includes("base") && t(c("base")), o.includes("class") && r(c("class"));
 		};
 	});
-})))(), 1)).default;
+}))(), 1).default;
 export { s as default };

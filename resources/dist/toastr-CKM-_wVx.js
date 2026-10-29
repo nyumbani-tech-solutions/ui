@@ -1,6 +1,6 @@
 import { a as e, i as t, n, r, t as i } from "./rolldown-runtime-DUcC5eAW.js";
 // node_modules/jquery/dist-module/jquery.module.js
-var a = /* @__PURE__ */ r({
+var a = r({
 	$: () => s,
 	default: () => s,
 	jQuery: () => s
@@ -2642,10 +2642,10 @@ function o(e, t) {
 }
 var s, c = n((() => {
 	s = o(window, !0);
-})), l = /* @__PURE__ */ i(((e, n) => {
+})), l = i(((e, n) => {
 	var { jQuery: r } = (c(), t(a));
 	n.exports = r;
-})), u = /* @__PURE__ */ e((/* @__PURE__ */ i(((e, t) => {
+})), u = e(i(((e, t) => {
 	(function(e) {
 		e(["jquery"], function(e) {
 			return (function() {
@@ -2788,7 +2788,7 @@ var s, c = n((() => {
 					}, h = {
 						toastId: r,
 						state: "visible",
-						startTime: /* @__PURE__ */ new Date(),
+						startTime: new Date(),
 						options: i,
 						map: n
 					};
@@ -2822,7 +2822,7 @@ var s, c = n((() => {
 							duration: i.showDuration,
 							easing: i.showEasing,
 							complete: i.onShown
-						}), i.timeOut > 0 && (s = setTimeout(k, i.timeOut), m.maxHideTime = parseFloat(i.timeOut), m.hideEta = (/* @__PURE__ */ new Date()).getTime() + m.maxHideTime, i.progressBar && (m.intervalId = setInterval(ie, 10)));
+						}), i.timeOut > 0 && (s = setTimeout(k, i.timeOut), m.maxHideTime = parseFloat(i.timeOut), m.hideEta = new Date().getTime() + m.maxHideTime, i.progressBar && (m.intervalId = setInterval(ie, 10)));
 					}
 					function w() {
 						n.iconClass && l.addClass(i.toastClass).addClass(a);
@@ -2864,12 +2864,12 @@ var s, c = n((() => {
 							duration: r,
 							easing: a,
 							complete: function() {
-								S(l), clearTimeout(s), i.onHidden && h.state !== "hidden" && i.onHidden(), h.state = "hidden", h.endTime = /* @__PURE__ */ new Date(), y(h);
+								S(l), clearTimeout(s), i.onHidden && h.state !== "hidden" && i.onHidden(), h.state = "hidden", h.endTime = new Date(), y(h);
 							}
 						});
 					}
 					function A() {
-						(i.timeOut > 0 || i.extendedTimeOut > 0) && (s = setTimeout(k, i.extendedTimeOut), m.maxHideTime = parseFloat(i.extendedTimeOut), m.hideEta = (/* @__PURE__ */ new Date()).getTime() + m.maxHideTime);
+						(i.timeOut > 0 || i.extendedTimeOut > 0) && (s = setTimeout(k, i.extendedTimeOut), m.maxHideTime = parseFloat(i.extendedTimeOut), m.hideEta = new Date().getTime() + m.maxHideTime);
 					}
 					function re() {
 						clearTimeout(s), m.hideEta = 0, l.stop(!0, !0)[i.showMethod]({
@@ -2878,7 +2878,7 @@ var s, c = n((() => {
 						});
 					}
 					function ie() {
-						var e = (m.hideEta - (/* @__PURE__ */ new Date()).getTime()) / m.maxHideTime * 100;
+						var e = (m.hideEta - new Date().getTime()) / m.maxHideTime * 100;
 						f.width(e + "%");
 					}
 				}
@@ -2893,7 +2893,7 @@ var s, c = n((() => {
 	})(typeof define == "function" && define.amd ? define : function(e, n) {
 		t !== void 0 && t.exports ? t.exports = n(l()) : window.toastr = n(window.jQuery);
 	});
-})))(), 1);
+}))(), 1);
 window.toastr = u.default, u.default.options = {
 	closeButton: !0,
 	debug: !1,
