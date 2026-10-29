@@ -3,6 +3,7 @@ import "./shell.js";
 import "./submit.js";
 import "./file-input.js";
 import "./modal-BVdvvjq-.js";
+import "./period-picker-ClfS90Y8.js";
 // resources/js/translate.js
 window.__ = (e, t = {}) => {
 	let n = window.__lang && window.__lang[e] || e;

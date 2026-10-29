@@ -11,11 +11,12 @@
             ['submit', 'Stops double submission and shows a spinner on the button that was pressed.'],
             ['file-input', 'Powers the file input component with previews and a remove action.'],
             ['modal', 'Registers the Alpine UI plugin and the nyumbaniModal component.'],
+            ['period-picker', 'Registers the periodPicker component of the period picker, with the Vanilla Calendar Pro calendars it opens.'],
         ]" />
     </x-docs::section>
 
     <x-docs::section id="bundle" title="One bundled file">
-        <p>An app imports a single file, <code>vendor/nyumbani/ui/resources/dist/ui.js</code>. It already contains every script above together with the packages they need: toastr and jQuery, and Alpine UI. The app installs none of them with npm. The formatting helpers are a separate file in Essentials.</p>
+        <p>An app imports a single file, <code>vendor/nyumbani/ui/resources/dist/ui.js</code>. It already contains every script above together with the packages they need: toastr and jQuery, Alpine UI, and Vanilla Calendar Pro with its styles. The app installs none of them with npm. The formatting helpers are a separate file in Essentials.</p>
         <p>The scripts under <code>resources/js</code> are the source of that file. When you change one inside the package, run <code>npm run build</code> in the package folder and commit <code>resources/dist</code> with it.</p>
     </x-docs::section>
 

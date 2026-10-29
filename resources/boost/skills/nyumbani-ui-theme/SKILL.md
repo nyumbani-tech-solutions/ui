@@ -27,6 +27,7 @@ Props: `message` (default "Nyumbani is processing your data...") and `size` (`sm
 
 ## Components
 - `<x-nyumbani::modal>`: see the nyumbani-modal skill.
+- `<x-nyumbani::period-picker>`: the date, month, year and range filter for reports and lists; see the nyumbani-period-picker skill.
 - Form controls are 16px on phones and 14px from `sm` up, and the layout's viewport is `width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no`, so pages do not zoom on focus or on a pinch. Never add `text-sm` or `text-xs` to an input, select or textarea, and keep that viewport meta when you write your own base layout.
 - `<x-nyumbani::file-input name="..." label="..." accept="..." :current="$upload" />`, where `$upload` is the saved Upload model (it supplies `url`, `title`, `formattedSize` and `isImage()`). The form needs `enctype="multipart/form-data"`.
 - `<x-nyumbani::nav-group>` and `<x-nyumbani::nav-link>` build the sidebar. Implement the `HasHomeRoute` contract for the home link.

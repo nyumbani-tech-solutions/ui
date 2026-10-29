@@ -28,6 +28,7 @@ class UiDocs
                 'layouts' => 'Layouts',
                 'theme' => 'Theme and buttons',
                 'modal' => 'Modal',
+                'period-picker' => 'Period picker',
                 'alerts-and-loader' => 'Alerts and loader',
                 'scripts' => 'Scripts',
                 'error-pages' => 'Error pages',

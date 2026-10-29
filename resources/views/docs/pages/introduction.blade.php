@@ -9,7 +9,7 @@
         <x-docs::table :columns="['Included', 'Details']" :rows="[
             ['Layouts', 'The portal, auth, error and base layouts, with the sidebar and navbar.'],
             ['Sign-in pages', 'Login, forgot password and reset password, bound to Essentials\' AuthViews contract.'],
-            ['Components', 'The modal, the loader, the file input and the navigation links, all as x-nyumbani components.'],
+            ['Components', 'The modal, the period picker, the loader, the file input and the navigation links, all as x-nyumbani components.'],
             ['Scripts', 'Toasts, the shell, the double-submit guard, the file input and the modal, pre-bundled into one file.'],
             ['Theme', 'A Tailwind 4 theme with the buttons, forms and colours of every app.'],
             ['Error pages', 'The 401, 403, 404, 419, 429, 500 and 503 pages.'],

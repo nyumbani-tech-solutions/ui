@@ -1,4 +1,8 @@
 /* Shared Nyumbani theme: import this once from the app's css, in place of Tailwind, which it brings. The app needs the tailwindcss npm package. */
+
+/* The Nyumbani fonts: every app gets them from here, so none loads its own */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @import 'tailwindcss';
 
 /* The styles of the bundled scripts, such as the toasts */
@@ -15,6 +19,8 @@
 @source '../../../docs/resources/views/**/*.blade.php';
 
 @theme {
+    --font-sans: Inter, Roboto, ui-sans-serif, system-ui, sans-serif;
+
     --color-primary-darker: #7a4708;
     --color-primary-dark: #9a5204;
     --color-primary: #d97706;
@@ -146,4 +152,58 @@
     .dt-tables-container :is(input:not([type='checkbox'], [type='radio']), select, textarea) {
         font-size: 16px;
     }
+}
+
+/* The period picker's calendar (Vanilla Calendar Pro) takes the Nyumbani primary colour for what is selected, today and the weekends */
+.vc[data-vc=calendar] {
+    --vc-date-selected-bg: var(--color-primary);
+    --vc-date-selected-color: #fff;
+    --vc-date-today-color: var(--color-primary-dark);
+    --vc-months-years-bg-selected: var(--color-primary);
+    --vc-months-years-color-selected: #fff;
+    --vc-focus-outline-color: var(--color-primary);
+
+    /* Weekends take the primary colour too, in place of the library's rose */
+    --vc-date-weekend-color: var(--color-primary-dark);
+    --vc-date-weekend-today-color: var(--color-primary-dark);
+    --vc-date-weekend-selected-bg: var(--color-primary);
+    --vc-date-weekend-selected-color: #fff;
+    --vc-date-weekend-hover-bg: color-mix(in srgb, var(--color-primary) 10%, white);
+    --vc-date-weekend-bg-hover: color-mix(in srgb, var(--color-primary) 10%, white);
+    --vc-date-weekend-hover-edge-bg: color-mix(in srgb, var(--color-primary) 20%, white);
+    --vc-date-range-middle-weekend-bg: color-mix(in srgb, var(--color-primary) 70%, transparent);
+    --vc-week-day-off-color: var(--color-primary-dark);
+    @apply w-full max-w-xs rounded border border-gray-200 text-sm shadow-lg;
+}
+
+/* The header buttons of the period picker's calendar open a list: the year in the month view, and the month and year in the day view. They look like the dropdown chips they are */
+.vc[data-vc-type=month] [data-vc=year],
+.vc[data-vc-type=default] :is([data-vc=month], [data-vc=year]) {
+    @apply inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-800 transition-colors hover:bg-primary/15 hover:text-primary-dark;
+
+    &::after {
+        content: '';
+        @apply mb-0.5 h-1.5 w-1.5 rotate-45 border-b-2 border-r-2 border-current opacity-50 transition-opacity;
+    }
+
+    &:hover::after {
+        @apply opacity-100;
+    }
+}
+
+/* Keep the month and year chips together in the middle of the header */
+.vc[data-vc-type=month] [data-vc=header] [data-vc-header=content],
+.vc[data-vc-type=default] [data-vc=header] [data-vc-header=content] {
+    @apply gap-1.5;
+}
+
+/* The hint under the grid belongs to the calendar above it, and shows only while that grid is showing: the months in the month view, the days in the day view */
+.vc[data-vc-type=month]:has(+ [data-period-hint=month]),
+.vc[data-vc-type=default]:has(+ [data-period-hint=day]) {
+    @apply rounded-b-none border-b-0 shadow-none;
+}
+
+.vc:not([data-vc-type=month]) + [data-period-hint=month],
+.vc:not([data-vc-type=default]) + [data-period-hint=day] {
+    display: none;
 }

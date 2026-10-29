@@ -1,6 +1,6 @@
 # nyumbani/ui
 
-The Nyumbani look, as a package: the portal, auth and error layouts, the sign-in pages, the modal, loader, file input and navigation components, toasts, the error pages, favicons and the Tailwind theme. It requires [`nyumbani/essentials`](../essentials), which stays headless and works without it.
+The Nyumbani look, as a package: the portal, auth and error layouts, the sign-in pages, the modal, period picker, loader, file input and navigation components, toasts, the error pages, favicons and the Tailwind theme. It requires [`nyumbani/essentials`](../essentials), which stays headless and works without it.
 
 Views and components share one namespace: `nyumbani::layouts.portal`, `nyumbani::auth.login` and `<x-nyumbani::modal>`.
 
@@ -71,3 +71,7 @@ The scripts in `resources/js` are bundled with toastr, jQuery and Alpine UI into
 ## Docs
 
 The full docs are served at `/nyumbani-ui/docs`, in the `local` environment only, by `nyumbani/docs` (`composer require --dev nyumbani/docs`). The package works without it.
+
+## Period picker
+
+`<x-nyumbani::period-picker type="month-range" />` is the one date filter for reports and lists: a day, month or year, or a range of them, written as the `period` string that `$request->period()` reads. Single days and months open a calendar beside the field; ranges open a modal with presets and a From and a To calendar. The calendars are [Vanilla Calendar Pro](https://vanilla-calendar.pro) (MIT), a dev dependency of this package that is bundled into `resources/dist/ui.js` and `ui.css`, so an app installs nothing. It adds about 20 kB of script and 7 kB of styles, gzipped, to the bundle every app loads. See the Period picker page of the UI docs and the `nyumbani-period-picker` skill.

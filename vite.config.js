@@ -12,7 +12,7 @@ export default defineConfig({
         emptyOutDir: true,
         lib: {
             entry: Object.fromEntries(
-                ['ui', 'toastr', 'shell', 'submit', 'file-input', 'modal', 'forms']
+                ['ui', 'toastr', 'shell', 'submit', 'file-input', 'modal', 'period-picker', 'forms']
                     .map((name) => [name, resolve(import.meta.dirname, `resources/js/${name}.js`)])
             ),
             formats: ['es'],
