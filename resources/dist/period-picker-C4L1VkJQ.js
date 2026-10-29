@@ -1222,117 +1222,119 @@ var Z = (e) => e.split("-").map(Number), Q = (e, t, n) => new Date(e, t - 1, 1).
 };
 document.addEventListener("alpine:init", () => {
 	Alpine.data("periodPicker", (e) => {
-		let t = {}, n;
+		let t = {}, n, r;
 		return {
-			value: e.period,
-			presets: e.presets,
-			from: "",
-			to: "",
-			open: !1,
-			editing: null,
-			popover: {},
-			init() {
-				n = this.$el, this.syncDraft(), this.$watch("open", (e) => {
-					this.editing = null, e && this.syncDraft();
-				});
-			},
-			syncDraft() {
-				let [e, t] = this.value.split(" to ");
-				this.from = e || "", this.to = t || "";
-			},
-			get label() {
-				return this.value ? pt(this.value, e.unit) : e.placeholder;
-			},
-			get draftLabel() {
-				return !this.from && !this.to ? e.placeholder : this.to ? this.from ? pt(`${this.from} to ${this.to}`, e.unit) : `… – ${$(this.to, e.unit)}` : `${$(this.from, e.unit)} – …`;
-			},
-			summary(t) {
-				return pt(t.value, e.unit);
-			},
-			get valid() {
-				return this.from !== "" && this.to !== "" && this.to >= this.from;
-			},
-			get backwards() {
-				return this.from !== "" && this.to !== "" && this.to < this.from;
-			},
-			isPicked(e) {
-				return e.value === `${this.from} to ${this.to}`;
-			},
-			pick(e) {
-				let [t, n] = e.value.split(" to ");
-				this.from = t, this.to = n;
-			},
-			apply() {
-				this.valid && (this.value = `${this.from} to ${this.to}`, this.open = !1, this.announce());
-			},
-			choose(e) {
-				this.value = e, this.announce();
-			},
-			fieldLabel(t) {
-				return this[t] ? $(this[t], e.unit) : "";
-			},
-			toggle(e, t) {
-				if (this.editing === e) {
-					this.editing = null;
-					return;
-				}
-				let n = t.getBoundingClientRect(), r = Math.min(Math.max(n.width, 272), 320), i = Math.max(8, Math.min(n.left, window.innerWidth - r - 8)), a = window.innerHeight - n.bottom >= 340;
-				this.popover = {
-					left: i,
-					width: r,
-					...a ? { top: n.bottom + 4 } : { bottom: window.innerHeight - n.top + 4 }
-				}, this.editing = e;
-			},
-			get popoverStyle() {
-				return Object.fromEntries(Object.entries(this.popover).map(([e, t]) => [e, `${t}px`]));
-			},
-			chosen(e, t) {
-				this[e] = t, this.editing = null, e === "value" && this.announce();
-			},
-			mountCalendar(n, r) {
-				let i = this, a = e.unit === "month", o = new dt(n, {
-					type: a ? "month" : "default",
-					selectionDatesMode: "single",
-					selectedTheme: "light",
-					firstWeekday: 1,
-					onClickDate(e) {
-						let [t] = e.context.selectedDates;
-						t && i.chosen(r, t);
-					},
-					onClickMonth(e) {
-						if (!a) return;
-						let t = String(e.context.selectedMonth + 1).padStart(2, "0");
-						i.chosen(r, `${e.context.selectedYear}-${t}`);
+			picker: {
+				value: e.period,
+				presets: e.presets,
+				from: "",
+				to: "",
+				open: !1,
+				editing: null,
+				popover: {},
+				syncDraft() {
+					let [e, t] = this.value.split(" to ");
+					this.from = e || "", this.to = t || "";
+				},
+				get label() {
+					return this.value ? pt(this.value, e.unit) : e.placeholder;
+				},
+				get draftLabel() {
+					return !this.from && !this.to ? e.placeholder : this.to ? this.from ? pt(`${this.from} to ${this.to}`, e.unit) : `… – ${$(this.to, e.unit)}` : `${$(this.from, e.unit)} – …`;
+				},
+				summary(t) {
+					return pt(t.value, e.unit);
+				},
+				get valid() {
+					return this.from !== "" && this.to !== "" && this.to >= this.from;
+				},
+				get backwards() {
+					return this.from !== "" && this.to !== "" && this.to < this.from;
+				},
+				isPicked(e) {
+					return e.value === `${this.from} to ${this.to}`;
+				},
+				pick(e) {
+					let [t, n] = e.value.split(" to ");
+					this.from = t, this.to = n;
+				},
+				apply() {
+					this.valid && (this.value = `${this.from} to ${this.to}`, this.open = !1, this.announce());
+				},
+				choose(e) {
+					this.value = e, this.announce();
+				},
+				fieldLabel(t) {
+					return this[t] ? $(this[t], e.unit) : "";
+				},
+				toggle(e, t) {
+					if (this.editing === e) {
+						this.editing = null;
+						return;
 					}
+					let n = t.getBoundingClientRect(), r = Math.min(Math.max(n.width, 272), 320), i = Math.max(8, Math.min(n.left, window.innerWidth - r - 8)), a = window.innerHeight - n.bottom >= 340;
+					this.popover = {
+						left: i,
+						width: r,
+						...a ? { top: n.bottom + 4 } : { bottom: window.innerHeight - n.top + 4 }
+					}, this.editing = e;
+				},
+				get popoverStyle() {
+					return Object.fromEntries(Object.entries(this.popover).map(([e, t]) => [e, `${t}px`]));
+				},
+				chosen(e, t) {
+					this[e] = t, this.editing = null, e === "value" && this.announce();
+				},
+				mountCalendar(n, r) {
+					let i = this, a = e.unit === "month", o = new dt(n, {
+						type: a ? "month" : "default",
+						selectionDatesMode: "single",
+						selectedTheme: "light",
+						firstWeekday: 1,
+						onClickDate(e) {
+							let [t] = e.context.selectedDates;
+							t && i.chosen(r, t);
+						},
+						onClickMonth(e) {
+							if (!a) return;
+							let t = String(e.context.selectedMonth + 1).padStart(2, "0");
+							i.chosen(r, `${e.context.selectedYear}-${t}`);
+						}
+					});
+					o.init(), t[r] = o, this.syncCalendar(r);
+				},
+				syncCalendar(n) {
+					let r = this[n], [i, a] = [this.from, this.to], o = t[n];
+					o && (e.unit === "month" ? r && o.set({
+						selectedMonth: Z(r)[1] - 1,
+						selectedYear: Z(r)[0]
+					}, {
+						month: !0,
+						year: !0
+					}) : o.set({
+						selectedDates: r ? [r] : [],
+						dateMin: n === "to" && i ? i : "1970-01-01",
+						dateMax: n === "from" && a ? a : "2470-12-31"
+					}, {
+						dates: !0,
+						month: !0,
+						year: !0
+					}));
+				},
+				announce() {
+					n.$nextTick(() => r.dispatchEvent(new CustomEvent("period-changed", {
+						detail: {
+							name: e.name,
+							value: this.value
+						},
+						bubbles: !0
+					})));
+				}
+			},
+			init() {
+				n = this, r = this.$el, this.picker.syncDraft(), this.$watch("picker.open", (e) => {
+					this.picker.editing = null, e && this.picker.syncDraft();
 				});
-				o.init(), t[r] = o, this.syncCalendar(r);
-			},
-			syncCalendar(n) {
-				let r = this[n], [i, a] = [this.from, this.to], o = t[n];
-				o && (e.unit === "month" ? r && o.set({
-					selectedMonth: Z(r)[1] - 1,
-					selectedYear: Z(r)[0]
-				}, {
-					month: !0,
-					year: !0
-				}) : o.set({
-					selectedDates: r ? [r] : [],
-					dateMin: n === "to" && i ? i : "1970-01-01",
-					dateMax: n === "from" && a ? a : "2470-12-31"
-				}, {
-					dates: !0,
-					month: !0,
-					year: !0
-				}));
-			},
-			announce() {
-				this.$nextTick(() => n.dispatchEvent(new CustomEvent("period-changed", {
-					detail: {
-						name: e.name,
-						value: this.value
-					},
-					bubbles: !0
-				})));
 			}
 		};
 	});

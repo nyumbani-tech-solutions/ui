@@ -24,6 +24,37 @@ class PeriodPicker extends Component
     ];
 
     /**
+     * The sizes of the picker, each with the classes of its field, its trigger button and its icon
+     *
+     * @var array<string, array{field: string, button: string, icon: string, padding: string}>
+     */
+    protected const SIZES = [
+        'sm' => ['field' => 'period-field-sm', 'button' => 'btn-sm', 'icon' => 'h-3.5 w-3.5', 'padding' => 'px-2.5'],
+        'normal' => ['field' => '', 'button' => '', 'icon' => 'h-4 w-4', 'padding' => 'px-3'],
+        'lg' => ['field' => 'period-field-lg', 'button' => 'btn-lg', 'icon' => 'h-5 w-5', 'padding' => 'px-4'],
+    ];
+
+    /**
+     * The class that sizes the field of a single picker, empty at the normal size
+     */
+    public string $fieldClass;
+
+    /**
+     * The class that sizes the trigger button of a range picker, empty at the normal size
+     */
+    public string $buttonClass;
+
+    /**
+     * The classes that size the calendar icon
+     */
+    public string $iconClass;
+
+    /**
+     * The class that pads the icon block beside a field
+     */
+    public string $iconPadding;
+
+    /**
      * The period the picker starts on, or an empty string when none is chosen
      */
     public string $period;
@@ -53,7 +84,7 @@ class PeriodPicker extends Component
     public array $years;
 
     /**
-     * Create the picker, with presets given as a list of label and period pairs, and the calendar icon on its fields shown or hidden and given a background class
+     * Create the picker, with presets given as a list of label and period pairs, the calendar icon on its fields shown or hidden and given a background class, and a size of sm, normal or lg
      *
      * @author Alvin G. Kaburu <geekaburu@nyumbanitech.co.ke>
      */
@@ -68,10 +99,16 @@ class PeriodPicker extends Component
         public ?string $title = null,
         public bool $icon = true,
         public ?string $iconBg = null,
+        public string $size = 'normal',
     ) {
         //  Refuse a type the picker does not know
         if (! array_key_exists($type, self::TYPES)) {
             throw new InvalidArgumentException("Unknown period picker type [{$type}]. Use one of: ".implode(', ', array_keys(self::TYPES)).'.');
+        }
+
+        //  Refuse a size the picker does not know
+        if (! array_key_exists($size, self::SIZES)) {
+            throw new InvalidArgumentException("Unknown period picker size [{$size}]. Use one of: ".implode(', ', array_keys(self::SIZES)).'.');
         }
 
         //  Determine whether the picker spans two dates
@@ -99,6 +136,12 @@ class PeriodPicker extends Component
 
         //  Colour the icon like the theme's buttons, unless the app gave its own classes
         $this->iconBg ??= 'bg-primary-darker hover:bg-primary-dark';
+
+        //  Size the field, the trigger button and the icon together
+        $this->fieldClass = self::SIZES[$size]['field'];
+        $this->buttonClass = self::SIZES[$size]['button'];
+        $this->iconClass = self::SIZES[$size]['icon'];
+        $this->iconPadding = self::SIZES[$size]['padding'];
 
         //  Offer presets on a range only, the app's own or the defaults for its unit
         $this->presets = $this->isRange ? ($presets ?? $this->defaultPresets()) : [];

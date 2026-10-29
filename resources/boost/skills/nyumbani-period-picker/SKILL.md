@@ -46,6 +46,7 @@ Payment::query()->whereBetween('paid_at', [$period->from, $period->to])->get();
 | `min-year`, `max-year` | 15 years back, this year | The years a year picker offers. They widen to hold the starting period and the presets |
 | `placeholder` | per type | The text before a period is chosen |
 | `title` | `Choose a period` | The heading of a range picker's modal |
+| `size` | `normal` | `sm`, `normal` or `lg`. Sizes the field, the calendar icon beside it and a range's trigger button together. An unknown size throws |
 | `icon` | `true` | Shows a calendar icon attached to the field of a day, month or year picker; tapping it opens the calendar. `:icon="false"` leaves a plain field |
 | `icon-bg` | the theme's button colour | Classes that colour the icon (`bg-secondary hover:bg-secondary-dark`), replacing the default `bg-primary-darker hover:bg-primary-dark`. The icon stays white; write the classes out in full so Tailwind finds them |
 
@@ -65,6 +66,6 @@ Default presets: `day-range` has Today, Yesterday, Last 7 days, Last 30 days, Th
 - Anything else: listen for `period-changed` on `window`; `event.detail` holds `name` and `value`.
 
 ## Gotchas
-- The picker keeps its state under `value`, `from`, `to`, `open`, `editing` and `popover`, so avoid those names in an Alpine scope that wraps it, and the modal's reserved names (`modal`, `data`, `init`).
+- The picker keeps all of its Alpine state under one key, `picker` (`picker.value`, `picker.open`, `picker.apply()`), plus Alpine's `init`. An `x-data` or `x-model` around it can use any names without clashing. Never add another top-level name to `periodPicker()` in `resources/js/period-picker.js`.
 - Pass `:value="$period->formatted"` so the picker shows the period the server actually used, including the default. Without it the picker starts empty when the request has no `period`.
 - Presets are worked out when the page renders, in the server's time zone.

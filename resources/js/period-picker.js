@@ -74,274 +74,285 @@ document.addEventListener('alpine:init', () => {
      *
      * The state is the committed value plus a draft (from and to) that a range picker edits inside its modal,
      * so nothing reaches the server until the user presses Apply.
+     *
+     * Everything lives under one key, picker, so an app that puts its own x-data and x-model around the picker can
+     * never clash with it: the only other name is init, which Alpine calls.
      */
     Alpine.data('periodPicker', (config) => {
         //  The calendars by the end they pick, kept out of the reactive state so Alpine never wraps them
         const calendars = {};
 
+        //  The component, once Alpine has created it, for the Alpine helpers the picker's methods need
+        let component;
+
         //  The element the picker sits on, which announces its changes: Alpine's $dispatch starts from the element that ran the code, and the modal's buttons live in the body, outside the page's forms
         let root;
 
         return {
-            value: config.period,
-            presets: config.presets,
-            from: '',
-            to: '',
-            open: false,
-            editing: null,
-            popover: {},
+            picker: {
+                value: config.period,
+                presets: config.presets,
+                from: '',
+                to: '',
+                open: false,
+                editing: null,
+                popover: {},
+
+                /**
+                 * Set the draft from the committed range
+                 */
+                syncDraft() {
+                    //  Split the range into its two ends
+                    const [from, to] = this.value.split(' to ');
+
+                    //  Keep each end, or nothing when there is no range yet
+                    this.from = from || '';
+                    this.to = to || '';
+                },
+
+                /**
+                 * Get the text for the trigger button: the period in plain words, or the placeholder when none is chosen
+                 */
+                get label() {
+                    return this.value ? describePeriod(this.value, config.unit) : config.placeholder;
+                },
+
+                /**
+                 * Get the draft range in plain words for the modal header, or the placeholder before anything is chosen
+                 */
+                get draftLabel() {
+                    //  Nothing chosen yet
+                    if (!this.from && !this.to) return config.placeholder;
+
+                    //  Only the start is chosen
+                    if (!this.to) return `${describe(this.from, config.unit)} – …`;
+
+                    //  Only the end is chosen
+                    if (!this.from) return `… – ${describe(this.to, config.unit)}`;
+
+                    return describePeriod(`${this.from} to ${this.to}`, config.unit);
+                },
+
+                /**
+                 * Get the dates a preset covers in plain words, shown beside its name
+                 */
+                summary(preset) {
+                    return describePeriod(preset.value, config.unit);
+                },
+
+                /**
+                 * Get whether the draft is a complete range that does not end before it starts
+                 */
+                get valid() {
+                    //  Both ends have the same shape, so comparing them as text compares them as dates
+                    return this.from !== '' && this.to !== '' && this.to >= this.from;
+                },
+
+                /**
+                 * Get whether the draft has both ends but ends before it starts
+                 */
+                get backwards() {
+                    return this.from !== '' && this.to !== '' && this.to < this.from;
+                },
+
+                /**
+                 * Get whether a preset is the draft
+                 */
+                isPicked(preset) {
+                    return preset.value === `${this.from} to ${this.to}`;
+                },
+
+                /**
+                 * Fill the draft with a preset
+                 */
+                pick(preset) {
+                    //  Split the preset into its ends
+                    const [from, to] = preset.value.split(' to ');
+
+                    //  Fill the draft
+                    this.from = from;
+                    this.to = to;
+                },
+
+                /**
+                 * Commit the draft range, close the modal and announce the change
+                 */
+                apply() {
+                    //  Ignore an incomplete or backwards range
+                    if (!this.valid) return;
+
+                    //  Commit the range and close the modal
+                    this.value = `${this.from} to ${this.to}`;
+                    this.open = false;
+
+                    //  Tell the page
+                    this.announce();
+                },
+
+                /**
+                 * Commit the value an inline picker holds and announce the change
+                 */
+                choose(value) {
+                    //  Keep the value
+                    this.value = value;
+
+                    //  Tell the page
+                    this.announce();
+                },
+
+                /**
+                 * Get the text a From or To field shows: the date in plain words, or nothing before one is chosen
+                 */
+                fieldLabel(key) {
+                    return this[key] ? describe(this[key], config.unit) : '';
+                },
+
+                /**
+                 * Open the calendar beside a field, or close it when it is already open
+                 */
+                toggle(key, field) {
+                    //  Close the calendar when it is the one open
+                    if (this.editing === key) {
+                        this.editing = null;
+
+                        return;
+                    }
+
+                    //  Find where the field is on the screen
+                    const box = field.getBoundingClientRect();
+
+                    //  Keep the calendar the width of the field, within what a calendar needs and the screen allows
+                    const width = Math.min(Math.max(box.width, 272), 320);
+                    const left = Math.max(8, Math.min(box.left, window.innerWidth - width - 8));
+
+                    //  Open below the field, or above it when the screen has no room below
+                    const fitsBelow = window.innerHeight - box.bottom >= 340;
+
+                    this.popover = { left, width, ...(fitsBelow ? { top: box.bottom + 4 } : { bottom: window.innerHeight - box.top + 4 }) };
+                    this.editing = key;
+                },
+
+                /**
+                 * Get the styles that float the calendar over the page where toggle() put it, so it never moves the fields
+                 *
+                 * This is an object, not a string: Alpine replaces the whole style attribute with a string, which would
+                 * undo the display: none that x-show sets and leave every calendar of the page showing at once.
+                 */
+                get popoverStyle() {
+                    return Object.fromEntries(Object.entries(this.popover).map(([side, pixels]) => [side, `${pixels}px`]));
+                },
+
+                /**
+                 * Keep the date picked on a calendar, as one end of the draft or as the value of a single picker, and close the calendar
+                 */
+                chosen(key, value) {
+                    //  Keep the date and close the calendar
+                    this[key] = value;
+                    this.editing = null;
+
+                    //  A single picker is applied as soon as it is picked, where a range waits for Apply
+                    if (key === 'value') this.announce();
+                },
+
+                /**
+                 * Create the calendar that picks one end of the range inside the element
+                 */
+                mountCalendar(element, key) {
+                    //  Keep the picker, since the calendar calls back with its own this
+                    const picker = this;
+
+                    //  Pick a month grid for a month range and a day grid otherwise
+                    const isMonth = config.unit === 'month';
+
+                    //  Create the calendar, which renders inline so it can never be clipped by the modal
+                    const calendar = new Calendar(element, {
+                        type: isMonth ? 'month' : 'default',
+                        selectionDatesMode: 'single',
+                        selectedTheme: 'light',
+                        firstWeekday: 1,
+                        onClickDate(self) {
+                            //  Take the one date that is selected
+                            const [date] = self.context.selectedDates;
+
+                            if (date) picker.chosen(key, date);
+                        },
+                        onClickMonth(self) {
+                            //  Leave a day calendar alone, where the header's month list only moves to that month
+                            if (!isMonth) return;
+
+                            //  Take the month and year that were clicked, as a period
+                            const month = String(self.context.selectedMonth + 1).padStart(2, '0');
+
+                            picker.chosen(key, `${self.context.selectedYear}-${month}`);
+                        },
+                    });
+
+                    //  Draw it, and show the end it already holds
+                    calendar.init();
+                    calendars[key] = calendar;
+                    this.syncCalendar(key);
+                },
+
+                /**
+                 * Show the date an end holds on its calendar, and stop the other end being picked backwards
+                 */
+                syncCalendar(key) {
+                    //  Read everything the calendar shows first, so Alpine reruns this when any of it changes
+                    const value = this[key];
+                    const [from, to] = [this.from, this.to];
+
+                    //  Wait until the calendar exists
+                    const calendar = calendars[key];
+
+                    if (!calendar) return;
+
+                    //  A month calendar shows the month and year of its end
+                    if (config.unit === 'month') {
+                        if (value) calendar.set({ selectedMonth: parts(value)[1] - 1, selectedYear: parts(value)[0] }, { month: true, year: true });
+
+                        return;
+                    }
+
+                    //  A day calendar selects its date, opens on its month and refuses dates the other end rules out
+                    calendar.set({
+                        selectedDates: value ? [value] : [],
+                        dateMin: key === 'to' && from ? from : '1970-01-01',
+                        dateMax: key === 'from' && to ? to : '2470-12-31',
+                    }, { dates: true, month: true, year: true });
+                },
+
+                /**
+                 * Tell the page the period changed, with the input name and the new period
+                 */
+                announce() {
+                    //  Wait for the hidden input to take the new value, so a listener that submits the form sends it
+                    component.$nextTick(() => root.dispatchEvent(new CustomEvent('period-changed', {
+                        detail: { name: config.name, value: this.value },
+                        bubbles: true,
+                    })));
+                },
+            },
 
             /**
-             * Copy the committed range into the draft whenever the modal opens
+             * Keep the component and the element it sits on, start the draft and reset it whenever the modal opens
              */
             init() {
+                //  Keep the component, since the picker's methods run with the picker as this and still need $watch and $nextTick
+                component = this;
+
                 //  Keep the element the picker sits on
                 root = this.$el;
 
                 //  Start the draft on the committed range
-                this.syncDraft();
+                this.picker.syncDraft();
 
                 //  Reset the draft each time the modal opens, so a cancelled edit is forgotten
-                this.$watch('open', (isOpen) => {
+                this.$watch('picker.open', (isOpen) => {
                     //  Close any calendar so the modal opens on the fields
-                    this.editing = null;
+                    this.picker.editing = null;
 
-                    if (isOpen) this.syncDraft();
+                    if (isOpen) this.picker.syncDraft();
                 });
-            },
-
-            /**
-             * Set the draft from the committed range
-             */
-            syncDraft() {
-                //  Split the range into its two ends
-                const [from, to] = this.value.split(' to ');
-
-                //  Keep each end, or nothing when there is no range yet
-                this.from = from || '';
-                this.to = to || '';
-            },
-
-            /**
-             * Get the text for the trigger button: the period in plain words, or the placeholder when none is chosen
-             */
-            get label() {
-                return this.value ? describePeriod(this.value, config.unit) : config.placeholder;
-            },
-
-            /**
-             * Get the draft range in plain words for the modal header, or the placeholder before anything is chosen
-             */
-            get draftLabel() {
-                //  Nothing chosen yet
-                if (!this.from && !this.to) return config.placeholder;
-
-                //  Only the start is chosen
-                if (!this.to) return `${describe(this.from, config.unit)} – …`;
-
-                //  Only the end is chosen
-                if (!this.from) return `… – ${describe(this.to, config.unit)}`;
-
-                return describePeriod(`${this.from} to ${this.to}`, config.unit);
-            },
-
-            /**
-             * Get the dates a preset covers in plain words, shown beside its name
-             */
-            summary(preset) {
-                return describePeriod(preset.value, config.unit);
-            },
-
-            /**
-             * Get whether the draft is a complete range that does not end before it starts
-             */
-            get valid() {
-                //  Both ends have the same shape, so comparing them as text compares them as dates
-                return this.from !== '' && this.to !== '' && this.to >= this.from;
-            },
-
-            /**
-             * Get whether the draft has both ends but ends before it starts
-             */
-            get backwards() {
-                return this.from !== '' && this.to !== '' && this.to < this.from;
-            },
-
-            /**
-             * Get whether a preset is the draft
-             */
-            isPicked(preset) {
-                return preset.value === `${this.from} to ${this.to}`;
-            },
-
-            /**
-             * Fill the draft with a preset
-             */
-            pick(preset) {
-                //  Split the preset into its ends
-                const [from, to] = preset.value.split(' to ');
-
-                //  Fill the draft
-                this.from = from;
-                this.to = to;
-            },
-
-            /**
-             * Commit the draft range, close the modal and announce the change
-             */
-            apply() {
-                //  Ignore an incomplete or backwards range
-                if (!this.valid) return;
-
-                //  Commit the range and close the modal
-                this.value = `${this.from} to ${this.to}`;
-                this.open = false;
-
-                //  Tell the page
-                this.announce();
-            },
-
-            /**
-             * Commit the value an inline picker holds and announce the change
-             */
-            choose(value) {
-                //  Keep the value
-                this.value = value;
-
-                //  Tell the page
-                this.announce();
-            },
-
-            /**
-             * Get the text a From or To field shows: the date in plain words, or nothing before one is chosen
-             */
-            fieldLabel(key) {
-                return this[key] ? describe(this[key], config.unit) : '';
-            },
-
-            /**
-             * Open the calendar beside a field, or close it when it is already open
-             */
-            toggle(key, field) {
-                //  Close the calendar when it is the one open
-                if (this.editing === key) {
-                    this.editing = null;
-
-                    return;
-                }
-
-                //  Find where the field is on the screen
-                const box = field.getBoundingClientRect();
-
-                //  Keep the calendar the width of the field, within what a calendar needs and the screen allows
-                const width = Math.min(Math.max(box.width, 272), 320);
-                const left = Math.max(8, Math.min(box.left, window.innerWidth - width - 8));
-
-                //  Open below the field, or above it when the screen has no room below
-                const fitsBelow = window.innerHeight - box.bottom >= 340;
-
-                this.popover = { left, width, ...(fitsBelow ? { top: box.bottom + 4 } : { bottom: window.innerHeight - box.top + 4 }) };
-                this.editing = key;
-            },
-
-            /**
-             * Get the styles that float the calendar over the page where toggle() put it, so it never moves the fields
-             *
-             * This is an object, not a string: Alpine replaces the whole style attribute with a string, which would
-             * undo the display: none that x-show sets and leave every calendar of the page showing at once.
-             */
-            get popoverStyle() {
-                return Object.fromEntries(Object.entries(this.popover).map(([side, pixels]) => [side, `${pixels}px`]));
-            },
-
-            /**
-             * Keep the date picked on a calendar, as one end of the draft or as the value of a single picker, and close the calendar
-             */
-            chosen(key, value) {
-                //  Keep the date and close the calendar
-                this[key] = value;
-                this.editing = null;
-
-                //  A single picker is applied as soon as it is picked, where a range waits for Apply
-                if (key === 'value') this.announce();
-            },
-
-            /**
-             * Create the calendar that picks one end of the range inside the element
-             */
-            mountCalendar(element, key) {
-                //  Keep the component, since the calendar calls back with its own this
-                const component = this;
-
-                //  Pick a month grid for a month range and a day grid otherwise
-                const isMonth = config.unit === 'month';
-
-                //  Create the calendar, which renders inline so it can never be clipped by the modal
-                const calendar = new Calendar(element, {
-                    type: isMonth ? 'month' : 'default',
-                    selectionDatesMode: 'single',
-                    selectedTheme: 'light',
-                    firstWeekday: 1,
-                    onClickDate(self) {
-                        //  Take the one date that is selected
-                        const [date] = self.context.selectedDates;
-
-                        if (date) component.chosen(key, date);
-                    },
-                    onClickMonth(self) {
-                        //  Leave a day calendar alone, where the header's month list only moves to that month
-                        if (!isMonth) return;
-
-                        //  Take the month and year that were clicked, as a period
-                        const month = String(self.context.selectedMonth + 1).padStart(2, '0');
-
-                        component.chosen(key, `${self.context.selectedYear}-${month}`);
-                    },
-                });
-
-                //  Draw it, and show the end it already holds
-                calendar.init();
-                calendars[key] = calendar;
-                this.syncCalendar(key);
-            },
-
-            /**
-             * Show the date an end holds on its calendar, and stop the other end being picked backwards
-             */
-            syncCalendar(key) {
-                //  Read everything the calendar shows first, so Alpine reruns this when any of it changes
-                const value = this[key];
-                const [from, to] = [this.from, this.to];
-
-                //  Wait until the calendar exists
-                const calendar = calendars[key];
-
-                if (!calendar) return;
-
-                //  A month calendar shows the month and year of its end
-                if (config.unit === 'month') {
-                    if (value) calendar.set({ selectedMonth: parts(value)[1] - 1, selectedYear: parts(value)[0] }, { month: true, year: true });
-
-                    return;
-                }
-
-                //  A day calendar selects its date, opens on its month and refuses dates the other end rules out
-                calendar.set({
-                    selectedDates: value ? [value] : [],
-                    dateMin: key === 'to' && from ? from : '1970-01-01',
-                    dateMax: key === 'from' && to ? to : '2470-12-31',
-                }, { dates: true, month: true, year: true });
-            },
-
-            /**
-             * Tell the page the period changed, with the input name and the new period
-             */
-            announce() {
-                //  Wait for the hidden input to take the new value, so a listener that submits the form sends it
-                this.$nextTick(() => root.dispatchEvent(new CustomEvent('period-changed', {
-                    detail: { name: config.name, value: this.value },
-                    bubbles: true,
-                })));
             },
         };
     });
