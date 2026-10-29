@@ -197,17 +197,6 @@
     @apply gap-1.5;
 }
 
-/* The hint under the grid belongs to the calendar above it, and shows only while that grid is showing: the months in the month view, the days in the day view */
-.vc[data-vc-type=month]:has(+ [data-period-hint=month]),
-.vc[data-vc-type=default]:has(+ [data-period-hint=day]) {
-    @apply rounded-b-none border-b-0 shadow-none;
-}
-
-.vc:not([data-vc-type=month]) + [data-period-hint=month],
-.vc:not([data-vc-type=default]) + [data-period-hint=day] {
-    display: none;
-}
-
 /* A period picker field with its calendar icon attached has no left border or corners. This sits in the base layer after the form rules, because their important declarations beat utility classes, however important */
 @layer base {
     input.period-field-attached, select.period-field-attached {

@@ -55,7 +55,7 @@ Default presets: `day-range` has Today, Yesterday, Last 7 days, Last 30 days, Th
 - The day and month fields are read-only and show the date in plain words; a tap opens a Vanilla Calendar Pro calendar that floats beside the field and never moves the page.
 - It closes on a pick, a second tap, an outside click, Escape (the modal stays open) and scroll.
 - In a day range, To refuses days before From and From refuses days after To.
-- The header's month and year (day view) or year (month view) are chips that open a list, with a hint line under the grid. Picking from those lists only navigates.
+- The header's month and year (day view) or year (month view) are chips that open a list. Picking from those lists only navigates.
 - Years, single or in a range, are plain selects.
 - Colours come from the `--vc-*` variables in the UI `theme.css`; change them there, never per page.
 

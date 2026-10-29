@@ -101,7 +101,7 @@
             ['Floats', 'The calendar opens beside its field over the page and never moves the fields or the modal. It opens above the field when there is no room below.'],
             ['Closes', 'When a date is picked, when the field is tapped again, on an outside click, on Escape (which leaves a modal open), and on scroll.'],
             ['Day limits', 'In a day range the To calendar refuses days before From, and the From calendar refuses days after To.'],
-            ['Header', 'In the day view the month and year in the header are chips that open a list, and in the month view the year is. A line under the grid says so. Picking a month or year from those lists only moves the calendar, it does not choose a date.'],
+            ['Header', 'In the day view the month and year in the header are chips that open a list, and in the month view the year is. Picking a month or year from those lists only moves the calendar, it does not choose a date.'],
             ['Years', 'A year or year range is a plain select, because a calendar adds nothing to picking a year.'],
         ]" />
         <p>The library and its styles are bundled into <code>ui.js</code> and <code>ui.css</code>, so an app installs nothing. They add about 20 kB of script and 7 kB of styles, gzipped.</p>

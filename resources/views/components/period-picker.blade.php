@@ -44,7 +44,6 @@
                             </label>
                             <div x-show="editing === 'from'" x-cloak x-bind:style="popoverStyle" class="fixed z-40">
                                 <div x-effect="syncCalendar('from')" x-init="mountCalendar($el, 'from')"></div>
-                                <p data-period-hint="{{ $unit }}" class="rounded-b border border-gray-200 bg-gray-50 px-3 py-2 text-center text-xs text-gray-500 shadow-lg">{{ $unit === 'month' ? __('Click the year to pick another year') : __('Click the month or year to jump to another') }}</p>
                             </div>
                         </div>
                     @endif
@@ -67,7 +66,6 @@
                             </label>
                             <div x-show="editing === 'to'" x-cloak x-bind:style="popoverStyle" class="fixed z-40">
                                 <div x-effect="syncCalendar('to')" x-init="mountCalendar($el, 'to')"></div>
-                                <p data-period-hint="{{ $unit }}" class="rounded-b border border-gray-200 bg-gray-50 px-3 py-2 text-center text-xs text-gray-500 shadow-lg">{{ $unit === 'month' ? __('Click the year to pick another year') : __('Click the month or year to jump to another') }}</p>
                             </div>
                         </div>
                     @endif
@@ -112,7 +110,6 @@
             </div>
             <div x-show="editing === 'value'" x-cloak x-bind:style="popoverStyle" class="fixed z-40">
                 <div x-effect="syncCalendar('value')" x-init="mountCalendar($el, 'value')"></div>
-                <p data-period-hint="{{ $unit }}" class="rounded-b border border-gray-200 bg-gray-50 px-3 py-2 text-center text-xs text-gray-500 shadow-lg">{{ $unit === 'month' ? __('Click the year to pick another year') : __('Click the month or year to jump to another') }}</p>
             </div>
         </div>
     @endif
