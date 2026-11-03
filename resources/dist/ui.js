@@ -1,6 +1,8 @@
 import "./toastr-CKM-_wVx.js";
+import "./fancybox-DZNnMWJc.js";
 import "./shell.js";
 import "./submit.js";
+import "./number-input.js";
 import "./file-input.js";
 import "./modal-CYDxxMUl.js";
 import "./period-picker-C4L1VkJQ.js";

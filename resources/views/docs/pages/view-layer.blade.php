@@ -70,7 +70,7 @@
 
     <x-docs::section id="scripts" title="Scripts, Alpine and Livewire">
         <x-docs::rule title="One import for the package scripts">
-            <p>Import <code>resources/dist/ui.js</code> once. It is pre-bundled with toastr, jQuery and Alpine UI, so the app installs none of them and must not add them to its own <code>package.json</code>. To take only some, import the files in <code>dist</code> one by one. Never import the files under <code>resources/js</code> from an app, and import the bundle before <code>Livewire.start()</code>. See Installation.</p>
+            <p>Import <code>resources/dist/ui.js</code> once. It is pre-bundled with toastr, Fancybox, jQuery and Alpine UI, so the app installs none of them and must not add them to its own <code>package.json</code>. To take only some, import the files in <code>dist</code> one by one. Never import the files under <code>resources/js</code> from an app, and import the bundle before <code>Livewire.start()</code>. See Installation.</p>
         </x-docs::rule>
         <x-docs::rule title="The package owns these">
             <p>Do not write your own date or period filter (use <code>&lt;x-nyumbani::period-picker&gt;</code>), toast setup (flash messages raise toastr toasts), shell script (sidebar, drawer and user menu), formatting helpers (<code>money</code>, <code>numeric</code>, <code>prettify</code>, <code>pluralize</code>, <code>formatDate</code> and the rest, mirroring the PHP helpers), file input (use <code>x-nyumbani::file-input</code>) or modal (use <code>x-nyumbani::modal</code> for every modal).</p>

@@ -66,7 +66,7 @@ Publish `config/ui.php` with `php artisan vendor:publish --tag=ui-config`.
 
 ## Changing the scripts
 
-The scripts in `resources/js` are bundled with toastr, jQuery and Alpine UI into `resources/dist`, so an app installs none of them. After changing one, run `npm run build` in this folder and commit `resources/dist`.
+The scripts in `resources/js` are bundled with toastr, Fancybox, jQuery and Alpine UI into `resources/dist`, so an app installs none of them. After changing one, run `npm run build` in this folder and commit `resources/dist`.
 
 ## Docs
 

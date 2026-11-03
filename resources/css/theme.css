@@ -228,3 +228,17 @@
     }
 }
 
+
+/* Number inputs show no up and down helpers. Opt back in with data-allow-spin; the number-input script also stops the wheel and the arrow keys */
+@layer base {
+    input[type='number']:not([data-allow-spin]) {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    input[type='number']:not([data-allow-spin])::-webkit-inner-spin-button,
+    input[type='number']:not([data-allow-spin])::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

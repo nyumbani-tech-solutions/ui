@@ -11,7 +11,9 @@
     @endif
 
     <div class="flex items-center gap-4">
-        <img x-show="showImage" x-cloak :src="imageSrc" class="h-16 w-16 rounded object-cover border border-gray-200" alt="">
+        <a x-show="showImage" x-cloak :href="imageSrc" data-fancybox data-type="image" :data-caption="displayName" title="Preview" class="shrink-0">
+            <img :src="imageSrc" class="h-16 w-16 rounded object-cover border border-gray-200" alt="">
+        </a>
 
         <div x-show="!showImage" class="h-16 w-16 flex items-center justify-center rounded border border-gray-200 bg-gray-50 text-gray-400">
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

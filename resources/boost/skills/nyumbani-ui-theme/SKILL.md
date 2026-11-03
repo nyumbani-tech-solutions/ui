@@ -29,7 +29,7 @@ Props: `message` (default "Nyumbani is processing your data...") and `size` (`sm
 - `<x-nyumbani::modal>`: see the nyumbani-modal skill.
 - `<x-nyumbani::period-picker>`: the date, month, year and range filter for reports and lists; see the nyumbani-period-picker skill.
 - Form controls are 16px on phones and 14px from `sm` up, and the layout's viewport is `width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no`, so pages do not zoom on focus or on a pinch. Never add `text-sm` or `text-xs` to an input, select or textarea, and keep that viewport meta when you write your own base layout.
-- `<x-nyumbani::file-input name="..." label="..." accept="..." :current="$upload" />`, where `$upload` is the saved Upload model (it supplies `url`, `title`, `formattedSize` and `isImage()`). The form needs `enctype="multipart/form-data"`.
+- `<x-nyumbani::file-input name="..." label="..." accept="..." :current="$upload" />`, where `$upload` is the saved Upload model (it supplies `url`, `title`, `formattedSize` and `isImage()`); a stored image's thumbnail opens in the Fancybox lightbox. The form needs `enctype="multipart/form-data"`.
 - `<x-nyumbani::nav-group>` and `<x-nyumbani::nav-link>` build the sidebar. Implement the `HasHomeRoute` contract for the home link.
 - Every top-level `nav-link` and `nav-group` needs an icon: put the `<path>` elements of a 24x24 outline Heroicon (Outline set, Copy SVG, paths only, never the `<svg>`) in the link's slot, or in `<x-slot:icon>` of a group. Links inside a group use `sub` and take no icon. The component draws the svg with stroke width 2.
 
@@ -41,3 +41,6 @@ Props: `message` (default "Nyumbani is processing your data...") and `size` (`sm
 
 ## Placeholders
 Every form input has a `placeholder`, never just the label: a prompt (`Enter your name here`), an example (`e.g. Jane Wanjiru`) or the rule (`At least 8 characters`). A `<select>` gets an empty first option as its placeholder. Checkbox, radio, file, hidden, date, time and colour inputs are exempt. Translate placeholders and never write a currency in one.
+
+## Number inputs
+Number inputs show no up and down helpers, ignore the wheel and the arrow keys, and refuse `e`, `E` and `+`, through the theme and the `number-input` script. Add `data-allow-spin` to an input that should keep the steppers.

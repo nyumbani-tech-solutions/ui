@@ -63,7 +63,7 @@
     </x-docs::section>
 
     <x-docs::section id="file-input" title="File input">
-        <p><code>&lt;x-nyumbani::file-input&gt;</code> replaces the browser's file field with a preview: a thumbnail for an image, the name and size otherwise, and an <em>Upload file</em> or <em>Change file</em> link. Pass the record's current upload to show what is already saved.</p>
+        <p><code>&lt;x-nyumbani::file-input&gt;</code> replaces the browser's file field with a preview: a thumbnail for an image, the name and size otherwise, and an <em>Upload file</em> or <em>Change file</em> link. Pass the record's current upload to show what is already saved; a saved or newly chosen image opens full size in a Fancybox lightbox when its thumbnail is clicked.</p>
         <x-docs::code lang="blade">
             @verbatim
             <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">

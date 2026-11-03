@@ -29,6 +29,7 @@ class UiDocs
                 'theme' => 'Theme and buttons',
                 'modal' => 'Modal',
                 'period-picker' => 'Period picker',
+                'fancybox' => 'Image previews',
                 'alerts-and-loader' => 'Alerts and loader',
                 'scripts' => 'Scripts',
                 'error-pages' => 'Error pages',
