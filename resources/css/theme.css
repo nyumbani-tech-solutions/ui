@@ -42,7 +42,7 @@
     }
 
     /* Controls are 16px on phones, because iOS Safari zooms the page in when a focused control has a smaller font, and 14px from the sm breakpoint up */
-    [type='text'], [type='file'], input:where(:not([type])), [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    [type='text'], [type='file']:not(.sr-only), input:where(:not([type])), [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
         @apply block w-full! bg-white border border-solid border-gray-300! text-base! sm:text-sm! rounded-sm! shadow-sm! placeholder-gray-400! text-gray-600! px-3 py-2 focus:border-primary! focus:ring-1 focus:ring-primary! focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-70;
     }
 
