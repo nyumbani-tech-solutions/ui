@@ -30,7 +30,7 @@
             <p>Use <code>@@date</code>, <code>@@time</code>, <code>@@datetime</code>, <code>@@dateforhumans</code>, <code>@@numeric</code>, <code>@@currency</code>, <code>@@percentage</code>, <code>@@prettify</code>, <code>@@bag</code> and <code>@@money</code> instead of raw <code>format()</code>, <code>date()</code> or <code>number_format()</code>. Never write a literal "KES" or "Ksh", even in a placeholder; use <code>e.g. 1000</code>.</p>
         </x-docs::rule>
         <x-docs::rule title="Blade syntax">
-            <p>Use <code>@@class()</code> for conditional classes, <code>@@selected</code> and <code>@@checked</code> for form state, the <code>:$var</code> shorthand when names match, <code>@@js()</code> to pass PHP data to Alpine, and <code>@@push('js')</code> for inline scripts. Nest content one level deeper than the enclosing directive. Pluralize with <code>str()-&gt;plural()</code> and link with <code>route()</code> and keyed parameters.</p>
+            <p>Use <code>@@class()</code> for conditional classes, <code>@@selected</code>, <code>@@checked</code> and <code>@@required</code> for form state (always these, never a ternary that echoes the attribute), the <code>:$var</code> shorthand when names match, <code>@@js()</code> to pass PHP data to Alpine, and <code>@@push('js')</code> for inline scripts. Nest content one level deeper than the enclosing directive. Pluralize with <code>str()-&gt;plural()</code> and link with <code>route()</code> and keyed parameters.</p>
         </x-docs::rule>
         <x-docs::rule title="Plain English copy">
             <p>View copy is plain English text, never wrapped in <code>__()</code> or <code>@@lang()</code>. Only flash messages go through the <code>alerts.*</code> keys.</p>
