@@ -3478,7 +3478,7 @@ var ft = {
 			if (!f) return !1;
 			let t = "clientX" in e ? e : e.changedTouches[0];
 			return !!t && (Math.abs(t.clientX - f.x) > 10 || Math.abs(t.clientY - f.y) > 10);
-		})(e) || (E("backdropClick", e), !e.defaultPrevented && C("backdropClick") && be(e));
+		})(e) || (E("backdropClick", e), e.defaultPrevented || C("backdropClick") && be(e));
 	}
 	function re() {
 		ge();

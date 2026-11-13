@@ -7,11 +7,11 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@alpinejs/ui": "^3.17.4",
+        "@alpinejs/ui": "^3.17.5",
         "@fancyapps/ui": "^6.1.15",
         "@tailwindcss/forms": "^0.5.11",
         "toastr": "^2.1.4",
         "vanilla-calendar-pro": "^3.4.0",
-        "vite": "^8.0.0"
+        "vite": "^8.3.8"
     }
 }

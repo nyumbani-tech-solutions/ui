@@ -1,1 +1,1 @@
-import "./fancybox-DZNnMWJc.js";
+import "./fancybox-DByp6PhQ.js";

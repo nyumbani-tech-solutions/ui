@@ -996,7 +996,7 @@ function o(e, t) {
 		isReady: !1,
 		readyWait: 1,
 		ready: function(e) {
-			(e === !0 ? --S.readyWait : S.isReady) || (S.isReady = !0, !(e !== !0 && --S.readyWait > 0) && pt.resolveWith(_, [S]));
+			(e === !0 ? --S.readyWait : S.isReady) || (S.isReady = !0, e !== !0 && --S.readyWait > 0 || pt.resolveWith(_, [S]));
 		}
 	}), S.ready.then = pt.then;
 	function mt() {
@@ -2886,7 +2886,7 @@ var s, c = n((() => {
 					return e.extend({}, v(), a.options);
 				}
 				function S(e) {
-					t ||= c(), !e.is(":visible") && (e.remove(), e = null, t.children().length === 0 && (t.remove(), o = void 0));
+					t ||= c(), e.is(":visible") || (e.remove(), e = null, t.children().length === 0 && (t.remove(), o = void 0));
 				}
 			})();
 		});

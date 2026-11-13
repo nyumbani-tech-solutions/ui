@@ -1019,7 +1019,7 @@ function A(e, t) {
 					this.__isOpenState ? this.__close() : this.__open();
 				},
 				__close(e) {
-					this.__isStatic || (this.__isOpenState = !1, e !== !1 && (e ||= this.$data.__buttonEl, !document.activeElement.isSameNode(e) && setTimeout(() => e.focus())));
+					this.__isStatic || (this.__isOpenState = !1, e !== !1 && (e ||= this.$data.__buttonEl, document.activeElement.isSameNode(e) || setTimeout(() => e.focus())));
 				},
 				__contains(e, n) {
 					return !!t.findClosest(n, (t) => t.isSameNode(e));
