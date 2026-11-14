@@ -1,6 +1,6 @@
 # nyumbani/ui
 
-The Nyumbani look, as a package: the portal, auth and error layouts, the sign-in pages, the modal, period picker, loader, file input and navigation components, toasts, the error pages, favicons and the Tailwind theme. It requires [`nyumbani/essentials`](../essentials), which stays headless and works without it.
+The Nyumbani look, as a package: the portal, auth and error layouts, the sign-in pages, the modal, period picker, loader, file input and navigation components, toasts, the error pages, favicons and the Tailwind theme with its self-hosted Inter font. It requires [`nyumbani/essentials`](../essentials), which stays headless and works without it.
 
 Views and components share one namespace: `nyumbani::layouts.portal`, `nyumbani::auth.login` and `<x-nyumbani::modal>`.
 

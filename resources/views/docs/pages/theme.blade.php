@@ -16,6 +16,11 @@
         </div>
     </x-docs::section>
 
+    <x-docs::section id="font" title="Font">
+        <p>The theme sets Inter as the sans font and serves it from the app itself. The font files ship in <code>resources/fonts/inter</code>, and <code>resources/css/fonts.css</code>, which the theme imports, declares them, so the app's build copies them into its own assets. No page loads a font from Google or another CDN, which keeps pages fast and working where those hosts are slow or blocked, and keeps visitors' addresses away from third parties.</p>
+        <p>Inter is a variable font: one file per script (latin, latin-ext, cyrillic, greek and vietnamese) holds every weight from 100 to 900, and the browser downloads only the scripts a page uses. Do not add a font link or a font <code>@import</code> to an app.</p>
+    </x-docs::section>
+
     <x-docs::section id="buttons" title="Buttons">
         <p>Every button is primary. There is no outline, danger or secondary variant, and <code>btn-secondary</code> only exists so old markup keeps its colour. Choose a size, never a colour.</p>
         <div class="not-prose my-5 flex flex-wrap items-center gap-3 rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
