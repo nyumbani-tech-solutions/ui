@@ -90,7 +90,7 @@ Use native `confirm()`, for example `onclick="return confirm('Delete this record
 ## Rules
 - The body is not padded by the component, so the content must be: wrap the default slot in an element with at least `p-4`, or put `class="p-4"` on the form. A fragment loaded with `src` pads its own root. Nothing may sit on the edge of the panel, except a deliberate full-bleed image or table. The `action` footer is padded by the component.
 - Buttons inside use `btn btn-primary`. Every button is primary.
-- Do not put `@php` in the view. Logic belongs in the `Nyumbani\Ui\Views\Components\Modal` class or a controller.
+- Do not put a multi-line `@php` in the view (a one-line `@php(...)` is fine). Logic belongs in the `Nyumbani\Ui\Views\Components\Modal` class or a controller.
 - The panel wrapper uses `overflow-clip`, not `overflow-hidden`, because the focus trap otherwise scrolls the slide-over sideways while it animates. Keep that when changing the component.
 - After changing the component, run `php artisan view:clear` if the compiled view reports an undefined variable.
 - The modal keeps all of its state and methods under one Alpine key, `modal` (`modal.open`, `modal.loading`, `modal.failed`, `modal.confirming`, `modal.show()`, `modal.advance()`), plus `data` (the review step reads `data.name`) and Alpine's `init`. Never add another top-level name to `nyumbaniModal()` in `resources/js/modal.js`: an app's own `x-data` and `x-model` sit on the same element, and Alpine resolves a bare name on that element's own data first, so a new name such as `show` silently shadows the app's state. Add members inside `modal`. `ModalTest` fails when a name appears at the top level. In an app, name the state you bind with `x-model` anything except `modal`, `data` and `init`.

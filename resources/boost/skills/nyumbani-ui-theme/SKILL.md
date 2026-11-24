@@ -42,7 +42,7 @@ Three tokens set every corner, and their defaults are the Nyumbani look: `--radi
 
 ## Rules
 - Components that need logic are classes in `Nyumbani\Ui\Views\Components`, registered under the `nyumbani` namespace. Simple ones are anonymous Blade components.
-- No `@php` in views. Prepare data in a controller or component class.
+- No multi-line `@php` in views (a one-line `@php(...)` is fine). Prepare data in a controller or component class.
 - Use `@use` for every class a view references.
 - After adding Tailwind classes in a package view, run `npm run build` in the app.
 

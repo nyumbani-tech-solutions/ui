@@ -34,7 +34,7 @@ Extend the layout and fill the sections:
 @section('icon') ...svg paths... @endsection
 @section('actions') ... @endsection
 ```
-Use `@use` for classes and never `@php`.
+Use `@use` for classes and no multi-line `@php` blocks (a one-line `@php(...)` is fine).
 
 ## Testing
 In tests, view the page with `view('errors.404')`. The `errors::` namespace only exists during a real render. Assert real requests with `$this->get('/missing')->assertNotFound()->assertSee('Page not found')`.

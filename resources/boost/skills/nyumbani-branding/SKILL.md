@@ -39,7 +39,7 @@ Use the tokens `primary`, `primary-dark`, `primary-darker` and `secondary*`. Do 
 A project that is not a Nyumbani app imports `base.css` instead (the styles, with the Nyumbani look as the defaults and no web font) and redefines in its own `@theme` and `:root` only the tokens it wants to change: the six colours, `--font-sans` and `--font-size-base`. It writes its own layouts and turns the shipped error pages off; see the nyumbani-ui-install skill. The layouts above, the favicons and the manifest are for Nyumbani apps only.
 
 ## Rules
-- Use `@use` for any class in a view and never `@php`.
+- Use `@use` for any class in a view and no multi-line `@php` blocks (a one-line `@php(...)` is fine).
 - Page titles come from `@section('title', ...)`. The layout appends the app name.
 
 ## Extending the layouts
