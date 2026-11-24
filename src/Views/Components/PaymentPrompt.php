@@ -45,7 +45,7 @@ class PaymentPrompt extends Component
         $this->timeout = $timeout ?? (int) ($attempt['timeout'] ?? 120);
 
         //  Follow the way the prompt asks for, or the attempt says, or by a websocket when Reverb is set up and else by polling the check url
-        $this->mode ??= $attempt['mode'] ?? null;
+        $this->mode = $this->mode ?: ($attempt['mode'] ?? null) ?: null;
         $this->mode ??= filled(config('ui.broadcasting.key')) && filled(config('ui.broadcasting.host'))
             ? 'websocket'
             : 'poll';

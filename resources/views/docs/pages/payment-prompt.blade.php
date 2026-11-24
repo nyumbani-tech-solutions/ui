@@ -90,7 +90,7 @@
         <x-docs::table :columns="['You see', 'Because', 'Do']" :rows="[
             ['We lost the connection', 'The browser could not subscribe to Reverb within 8 seconds.', 'Start Reverb and check the REVERB_* or UI_ECHO_* values. curl http://localhost:8080/up answers 200 when it runs.'],
             ['No check requests while polling', 'The page runs an old bundle, or the attempt was started before DARAJA_STK_MODE was set: the contract carries the mode.', 'Run npm run build in packages/ui and in the app, then start a new push.'],
-            ['Waiting never moves on', 'The STK result never reached the app: Safaricom cannot reach a local machine.', 'Use a tunnel, or DARAJA_STK_SIMULATE with the stk-simulator buttons.'],
+            ['Waiting never moves on', 'The STK result never reached the app: Safaricom cannot reach a local machine.', 'Use a tunnel, or DARAJA_STK_SIMULATE, and answer from the simulator on the STK push page of the Daraja docs.'],
             ['Confirmed at once, with no payment', 'A resolver confirmed the attempt from an old payment.', 'Make the resolver check the amount and that the payment is newer than the attempt.'],
             ['No countdown or wrong length', 'The contract carries the timeout it was built with.', 'Set DARAJA_STK_TIMEOUT and start a new push, or pass :timeout.'],
             ['Copy does nothing', 'The browser refused the copy.', 'The value can still be typed in. The toast says so.'],

@@ -62,6 +62,6 @@ The default `websocket` mode throws a `LogicException` without Reverb settings. 
 | --- | --- | --- |
 | "We lost the connection" after 8 seconds | The browser could not subscribe to Reverb | Start Reverb, check `REVERB_*` or `UI_ECHO_*` |
 | No `check` requests while polling | The page runs an old bundle, or the attempt was started before `DARAJA_STK_MODE` was set (the contract carries the mode) | Run `npm run build` in `packages/ui` and in the app, then start a new push |
-| Waiting never moves on | The STK result never reached the app | Use a tunnel, or `DARAJA_STK_SIMULATE` with `<x-nyumbani::stk-simulator :$attempt />` |
+| Waiting never moves on | The STK result never reached the app | Use a tunnel, or `DARAJA_STK_SIMULATE` and answer from the simulator panel on the STK push page of the Daraja docs |
 | Confirmed at once with no payment | A resolver confirmed it from an old payment | Make the resolver check the amount and that the payment is newer |
 | Wrong countdown | The contract carries the timeout it was built with | Set `DARAJA_STK_TIMEOUT` and start a new push, or pass `:timeout` |

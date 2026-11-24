@@ -14,4 +14,3 @@ import './file-input';
 import './modal';
 import './period-picker';
 import './payment-prompt';
-import './stk-simulator';
