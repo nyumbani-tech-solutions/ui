@@ -1,6 +1,6 @@
 # nyumbani/ui
 
-The Nyumbani look, as a package: the portal, auth and error layouts, the sign-in pages, the modal, period picker, loader, file input, password input and navigation components, toasts, the error pages, favicons and the Tailwind theme. It requires [`nyumbani/essentials`](../essentials), which stays headless and works without it.
+The Nyumbani look, as a package: the portal, auth and error layouts, the sign-in pages, the modal, period picker, searchable select, loader, file input, password input and navigation components, toasts, the error pages, favicons and the Tailwind theme. It requires [`nyumbani/essentials`](../essentials), which stays headless and works without it.
 
 Views and components share one namespace: `nyumbani::layouts.portal`, `nyumbani::auth.login` and `<x-nyumbani::modal>`.
 
@@ -113,5 +113,11 @@ The full docs are served at `/nyumbani-ui/docs`, in the `local` environment only
 ## Period picker
 
 `<x-nyumbani::period-picker type="month-range" />` is the one date filter for reports and lists: a day, month or year, or a range of them, written as the `period` string that `$request->period()` reads. Single days and months open a calendar beside the field; ranges open a modal with presets and a From and a To calendar. The calendars are [Vanilla Calendar Pro](https://vanilla-calendar.pro) (MIT), a dev dependency of this package that is bundled into `resources/dist/ui.js` and `ui.css`, so an app installs nothing. It adds about 20 kB of script and 7 kB of styles, gzipped, to the bundle every app loads. See the Period picker page of the UI docs and the `nyumbani-period-picker` skill.
+
+## Searchable select
+
+Add `data-searchable` to a `<select>` whose list can grow long, such as customers or agents, and the user types to find an option instead of scrolling. The select stays in the page and is still what the form posts, so `@selected`, `old()`, `required`, `x-model` and `wire:model` work unchanged; the script only puts a filtering field in its place. Put words to match that an option does not show, such as a phone number, in its `data-search`. See the Searchable select page of the UI docs.
+
+## Payment prompt
 
 `<x-nyumbani::payment-prompt>` is the one screen for paying with M-Pesa: it follows a push your app started (with `StkPushManager` from `nyumbani/daraja`, by a request, Livewire or ajax) and shows how to pay by hand whenever the push does not succeed. It follows over a Reverb websocket, or by polling the check url when there is none: set `DARAJA_STK_MODE=poll` (with `DARAJA_STK_POLL_INTERVAL`, 3 seconds, and `DARAJA_STK_POLL_DURATION`, 300 seconds) or pass `mode="poll"`, `:interval` and `:duration`. Without a mode it polls only when Reverb is not set up. Reverb needs (`REVERB_APP_KEY`, `REVERB_HOST`, `REVERB_PORT`, `REVERB_SCHEME`, or the `UI_ECHO_*` keys) and a queue worker, which polling does not. How long it waits for the payer to answer comes from the attempt's `timeout` (`DARAJA_STK_TIMEOUT`, 120 seconds), or the `timeout` prop. `laravel-echo` and `pusher-js` are dev dependencies of this package that are bundled into `resources/dist`, loaded only when a prompt is on the page, so an app installs nothing. See the Payment prompt page of the UI docs and the `nyumbani-payment-prompt` skill.

@@ -11,6 +11,7 @@
             ['shell', 'Runs the sidebar: a drawer on phones, collapsible to icons on large screens, closed by a tap or Escape.'],
             ['submit', 'Stops double submission and shows a spinner on the button that was pressed.'],
             ['number-input', 'Keeps number inputs from changing by accident: no spinner buttons, and the wheel, the arrow keys and the characters e, E and + do nothing.'],
+            ['searchable-select', 'Turns a select with data-searchable into a field the user types in to filter its options. See the Searchable select page.'],
             ['file-input', 'Powers the file input component with previews and a remove action.'],
             ['modal', 'Registers the Alpine UI plugin and the nyumbaniModal component.'],
             ['period-picker', 'Registers the periodPicker component of the period picker, with the Vanilla Calendar Pro calendars it opens.'],

@@ -3,6 +3,7 @@ import "./fancybox-DByp6PhQ.js";
 import "./shell.js";
 import "./submit.js";
 import "./number-input.js";
+import "./searchable-select.js";
 import "./file-input.js";
 import "./modal-DQKQ_V_m.js";
 import "./period-picker-C4L1VkJQ.js";

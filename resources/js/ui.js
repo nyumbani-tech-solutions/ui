@@ -1,6 +1,6 @@
 /**
  * Install every Nyumbani UI script at once: import this single file from the app's js. It sets up toasts, the Fancybox lightbox,
- * the shell, the double-submit guard, the number input guard, the file input, the modal, the period picker, the payment prompt and its simulator. The packages they import (toastr and
+ * the shell, the double-submit guard, the number input guard, the searchable select, the file input, the modal, the period picker, the payment prompt and its simulator. The packages they import (toastr and
  * @alpinejs/ui) are listed in the package.json beside this folder and bundled into resources/dist, so an
  * app installs none of them. The formatting helpers live in nyumbani/essentials.
  */
@@ -10,6 +10,7 @@ import './fancybox';
 import './shell';
 import './submit';
 import './number-input';
+import './searchable-select';
 import './file-input';
 import './modal';
 import './period-picker';

@@ -1,6 +1,6 @@
 ---
 name: nyumbani-ui-theme
-description: "Invoke when styling buttons, showing toast alerts, adding a loading state or spinner, or building forms, file inputs and navigation in a Nyumbani app. Covers btn classes, back()->alert(), <x-nyumbani::loader>, file-input and nav components."
+description: "Invoke when styling buttons, showing toast alerts, adding a loading state or spinner, or building forms, file inputs, searchable selects and navigation in a Nyumbani app. Covers btn classes, back()->alert(), <x-nyumbani::loader>, data-searchable selects, file-input and nav components."
 metadata:
   author: nyumbani
 ---
@@ -35,6 +35,7 @@ Three tokens set every corner, and their defaults are the Nyumbani look: `--radi
 - `<x-nyumbani::modal>`: see the nyumbani-modal skill.
 - `<x-nyumbani::period-picker>`: the date, month, year and range filter for reports and lists; see the nyumbani-period-picker skill.
 - Form controls are 16px on phones and 14px from `sm` up, and the layout's viewport is `width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no`, so pages do not zoom on focus or on a pinch. Never add `text-sm` or `text-xs` to an input, select or textarea, and keep that viewport meta when you write your own base layout.
+- `<select data-searchable>` is the picker for any list of records that can grow long (customers, agents, units, leads): the `searchable-select` script hides the select and shows a field that filters a floating list as the user types. Every typed word must appear in the option, ignoring case and accents; put extra words to match, such as a phone number, in the option's `data-search`. The select stays the source of truth, so `name`, `@selected`, `old()`, `required`, `x-model`, `wire:model`, optgroups, options added later and values set by code all keep working, and picking fires `input` and `change` on it. The list floats over modals and Escape closes only the list. A `multiple` select is left alone. Never build your own combobox or pull in Tom Select or Choices.
 - `<x-nyumbani::file-input name="..." label="..." accept="..." :current="$upload" />`, where `$upload` is the saved Upload model (it supplies `url`, `title`, `formattedSize` and `isImage()`); a stored image's thumbnail opens in the Fancybox lightbox. The form needs `enctype="multipart/form-data"`.
 - `<x-nyumbani::password-input name="password" label="Password" />` is the only password field: it has an eye button that shows or hides the text. Props: `name` (default `password`, also the id), `label`, `placeholder` (default "Enter your password"; pass the rule, such as "At least 8 characters", on a new-password field), `autocomplete` (default `current-password`; use `new-password` when setting one) `:required` and `icon` (a lock inside the left edge). The sign-in and reset-password pages use it. It marks itself invalid and prints the first error for its name, and passes any other attribute (`id`, `minlength`, `wire:model`) to the input. Never hand-write a password input or your own toggle.
 - `<x-nyumbani::nav-group>` and `<x-nyumbani::nav-link>` build the sidebar. Implement the `HasHomeRoute` contract for the home link.

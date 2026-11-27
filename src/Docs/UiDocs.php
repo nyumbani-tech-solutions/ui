@@ -29,6 +29,7 @@ class UiDocs
                 'theme' => 'Theme and buttons',
                 'modal' => 'Modal',
                 'period-picker' => 'Period picker',
+                'searchable-select' => 'Searchable select',
                 'payment-prompt' => 'Payment prompt',
                 'fancybox' => 'Image previews',
                 'alerts-and-loader' => 'Alerts and loader',
